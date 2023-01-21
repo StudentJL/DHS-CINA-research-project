@@ -4,3 +4,5 @@ a research project performed during participation in the Department of Homeland 
 Used the R programming language to perform a comprehensive data analysis of chat logs from a ransomware group
 
 Some of the code was reproduced in Python
+
+A html presentation was made, including the information, theories, and conclusions, found by the 3 members of our research team.
