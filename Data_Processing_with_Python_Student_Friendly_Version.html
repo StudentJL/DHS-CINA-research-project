@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="generator" content="quarto-0.9.80">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Data_Processing_with_Python_Student_Friendly_Version</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+
+  <script src="Data_Processing_with_Python_Student_Friendly_Version_files/libs/clipboard/clipboard.min.js"></script>
+  <script src="Data_Processing_with_Python_Student_Friendly_Version_files/libs/quarto-html/quarto.js"></script>
+  <script src="Data_Processing_with_Python_Student_Friendly_Version_files/libs/quarto-html/popper.min.js"></script>
+  <script src="Data_Processing_with_Python_Student_Friendly_Version_files/libs/quarto-html/tippy.umd.min.js"></script>
+  <script src="Data_Processing_with_Python_Student_Friendly_Version_files/libs/quarto-html/anchor.min.js"></script>
+  <link href="Data_Processing_with_Python_Student_Friendly_Version_files/libs/quarto-html/tippy.css" rel="stylesheet">
+  <link href="Data_Processing_with_Python_Student_Friendly_Version_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
+  <script src="Data_Processing_with_Python_Student_Friendly_Version_files/libs/bootstrap/bootstrap.min.js"></script>
+  <link href="Data_Processing_with_Python_Student_Friendly_Version_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+  <link href="Data_Processing_with_Python_Student_Friendly_Version_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body class="fullcontent">
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+<header id="title-block-header" class="quarto-title-block default">
+
+<div class="quarto-title"><h1 class="title display-7">Data_Processing_with_Python_Student_Friendly_Version</h1></div></header>
+<p>Libraries that will be run in this document. These may require installment in Terminal using “pip install”:</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd <span class="co"># importing the pandas package to manipulate dataframes</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re <span class="co"># importing the re message to use regular expressions on text</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> siuba <span class="im">import</span> count</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px <span class="co"># importing plotly.express to make interactive plots</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> nltk</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>nltk.download(<span class="st">"punkt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>True
+
+[nltk_data] Downloading package punkt to
+[nltk_data]     C:\Users\jliu2\AppData\Roaming\nltk_data...
+[nltk_data]   Package punkt is already up-to-date!</code></pre>
+</div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.corpus <span class="im">import</span> stopwords</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> iocextract</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests <span class="co"># to make requests to websites</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json <span class="co"># to read or load json files</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.graph_objects <span class="im">as</span> go <span class="co"># required to make the map</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tidytext</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tidytext <span class="im">import</span> unnest_tokens, bind_tf_idf <span class="co"># to run unnest_token, plyr may have to be installed on terminal</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> wordcloud <span class="im">import</span> WordCloud</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt <span class="co"># required to show the wordcloud</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.corpus <span class="im">import</span> words</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pyvis</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyvis.network <span class="im">import</span> Network</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In this Quarto document, I will reproduce some of the work for this research project on the Conti Ransomware Group’s chat logs, which we first coded in the R programming language, now in the Python programming language.</p>
+<p>This version is meant to be usable by students. It should be reproducible, simple to browse, and well-explained. Because the original data set was too large and would cause some of the codes to run more slowly, only a smaller sample of the data set will be used here.</p>
+<p>The first code chunk will set the folder or directory that this quarto document will work in. Without later specifying a different folder, only the files in this folder can be read, and any files written will be saved in this folder:</p>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="sourceCode r cell-code code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span>opts_knit<span class="sc">$</span><span class="fu">set</span>(<span class="at">root.dir =</span> <span class="fu">normalizePath</span>(<span class="st">"C:</span><span class="sc">\\</span><span class="st">Users</span><span class="sc">\\</span><span class="st">jliu2</span><span class="sc">\\</span><span class="st">Documents</span><span class="sc">\\</span><span class="st">R_Scripts"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The code chunk above will be the only one written in R. Please replace the directory inside quotation marks with the directory of the folder you would like to work in, replacing single backslashes with double backslashes. We can used the <em>getwd()</em> function to check what folder we are in. If the code above does not work, then we can go to the <em>Tools</em> tab, <em>Global Options</em>, and change the default working directory.</p>
+<p>Some of the following codes will also be reproduced from or based on what is in a blog post written by <em>Microsoft 365 Defender Research Team</em>, who did a project on the same topic. A link to their post: https://www.microsoft.com/security/blog/2022/06/01/using-python-to-unearth-a-goldmine-of-threat-intelligence-from-leaked-chat-logs/</p>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<p>Using a function from the <em>pandas</em> package, we will import the dataset into RStudio.</p>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd <span class="co"># importing the pandas package to manipulate dataframes</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># We will start by importing the unedited dataset xlsx file in the current directory, using the read_excel() function to read an xlsx file:</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_excel(<span class="st">"json_files_combined.xlsx"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking what type the data has been imported into:</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The dataset has been imported as a"</span>, <span class="bu">type</span>(df))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>The dataset has been imported as a &lt;class 'pandas.core.frame.DataFrame'&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking the length of the dataframe:</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"This dataframe is"</span>, <span class="bu">len</span>(df), <span class="st">"rows long."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>This dataframe is 60800 rows long.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 60,800 rows is too long for learning purposes, so we will instead take a random sample 1/10 of the length: </span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>sample <span class="op">=</span> df.sample(frac<span class="op">=</span><span class="fl">0.1</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The length of the sample dataset is"</span>, <span class="bu">len</span>(sample))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>The length of the sample dataset is 6080</code></pre>
+</div>
+</div>
+<p>After having rows randomly taken from it, the order in the dataframe had been ruin. To fix that, we can use the sort_values() function:</p>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>sample <span class="op">=</span> sample.sort_values(by <span class="op">=</span> <span class="st">"ts"</span>) <span class="co"># sorting the dataframe's rows by the values in its timestamp column from earliest to latest</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>sample.head(<span class="dv">5</span>) <span class="co"># checking the first 5 rows of the dataframe</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>                            ts  ...                                         body
+4   2021-01-29T04:32:16.858754  ...  have the pads changed again? no connection!
+15  2021-01-29T08:15:57.669241  ...                                          Hey
+36  2021-01-29T13:19:03.182143  ...                                there is more
+45  2021-01-29T15:19:40.874614  ...                                           OK
+76  2021-01-31T02:08:55.111254  ...                                          Yes
+
+[5 rows x 4 columns]</code></pre>
+</div>
+</div>
+<p>Sometimes, we would want to find or perform operations on certain segments of text from a larger string or a dataset. For that, the functions from the <em>re</em> package, and regular expressions, are useful.</p>
+<p>Regular expressions represent text, or multiple instances of texts. Different functions and different programming languages may take regular expressions slightly differently, but they are usually written similarly. For the following regular expressions, a letter or number by itself would represent just itself in the regular expression, but if something is put between brackets [], that would represent the presence of 1 or more if the [] are followed by a + sign, and 0 or more if followed by a * sign, of any one thing in the brackets.</p>
+<div class="cell">
+<div class="sourceCode" id="cb13"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re <span class="co"># importing the re message to use regular expressions on text</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>sample[<span class="st">"ts"</span>] <span class="op">=</span> sample[<span class="st">"ts"</span>].<span class="bu">str</span>.replace(<span class="vs">r"T[0-9]*:[0-9]*:[0-9]*.[0-9]*"</span>, <span class="st">""</span>, regex<span class="op">=</span><span class="va">True</span>) <span class="co"># using the replace function &amp; a regular expression to remove hour, minute, seconds, from the timestamp column</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>sample[<span class="st">"from"</span>] <span class="op">=</span> sample[<span class="st">"from"</span>].<span class="bu">str</span>.replace(<span class="vs">r"[@.]+[A-Za-z0-9.]*"</span>, <span class="st">""</span>, regex<span class="op">=</span><span class="va">True</span>) <span class="co"># using the replace function &amp; a regular expression to remove extensions from the usernames of the hackers who sent messages</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>sample[<span class="st">"to"</span>] <span class="op">=</span> sample[<span class="st">"to"</span>].<span class="bu">str</span>.replace(<span class="vs">r"[@.]+[A-Za-z0-9.]*"</span>, <span class="st">""</span>, regex<span class="op">=</span><span class="va">True</span>) <span class="co"># using the replace function &amp; a regular expression to remove extensions from the usernames of the hackers who received messages</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co"># creating a dictionary with slang words used by the hackers, paired with their translations</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>slang <span class="op">=</span> {<span class="st">"Hell"</span>:<span class="st">"AD"</span>, <span class="st">"YES"</span>:<span class="st">"DA"</span>, <span class="st">"wheelbarrow"</span>:<span class="st">"host"</span>, <span class="st">"cars"</span>:<span class="st">"hosts"</span>, <span class="st">"cue balls"</span>:<span class="st">"bitcoin"</span>, <span class="st">"cue ball"</span>:<span class="st">"bitcoin"</span>, <span class="st">"credits"</span>:<span class="st">"credentials"</span>, <span class="st">"vmik"</span>:<span class="st">"WMIC"</span>, <span class="st">"grid"</span>:<span class="st">"network"</span>, <span class="st">"facial expressions"</span>:<span class="st">"mimikatz"</span>, <span class="st">"fireworks"</span>:<span class="st">"firewall"</span>, <span class="st">"whining"</span>:<span class="st">"SQL"</span>, <span class="st">"school"</span>:<span class="st">"SQL"</span>, <span class="st">"balls"</span>:<span class="st">"shares"</span>, <span class="st">"zithers"</span>:<span class="st">"Citrix"</span>, <span class="st">"food"</span>:<span class="st">"FUD"</span>, <span class="st">"silkcode"</span>:<span class="st">"shellcode"</span>, <span class="st">"kosh"</span>:<span class="st">"cash"</span>, <span class="st">"toad"</span>:<span class="st">"jabber"</span>, <span class="st">"booze"</span>:<span class="st">"Emotet"</span>, <span class="st">"the trick or trick"</span>:<span class="st">"Trickbot"</span>, <span class="st">"BC"</span>:<span class="st">"BazarBackdoor"</span>, <span class="st">"backpack"</span>:<span class="st">"Ryuk"</span>} </span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co"># using the "slang" dictionary to replace slang words with understandable english words: </span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>sample[<span class="st">"body"</span>] <span class="op">=</span> sample[<span class="st">"body"</span>].replace(slang, regex<span class="op">=</span><span class="va">True</span>) </span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>sample.head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>            ts      from     to                                         body
+4   2021-01-29     price  green  have the pads changed again? no connection!
+15  2021-01-29   vampire  mango                                          Hey
+36  2021-01-29     stern  mango                                there is more
+45  2021-01-29  defender  stern                                           OK
+76  2021-01-31     stern   mors                                          Yes</code></pre>
+</div>
+</div>
+</section>
+<section id="activity-timeline" class="level2">
+<h2 class="anchored" data-anchor-id="activity-timeline">Activity Timeline</h2>
+<p>The Microsoft 365 Defender Research Team made a Activeness Timeline for the Conti Ransomware group, using data on the number of message their members sent each day, and the <em>bokeh</em> visualization library, which can create visualizations that can be inserted into HTML pages.</p>
+<p>I will instead use the <em>plotly</em> visualization library, because it can produce similar visualizations, but requires less coding and will not produce errors when repeatedly running similar codes.</p>
+<p>But before making the visualization, we need to put the data in a suitable form:</p>
+<div class="cell">
+<div class="sourceCode" id="cb15"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># importing count() function from the siuba package</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> siuba <span class="im">import</span> count</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>sample_ts_count <span class="op">=</span> count(sample, <span class="st">"ts"</span>) <span class="co"># counting the number of messages for each timestamp</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>sample_ts_count[<span class="st">"ts"</span>] <span class="op">=</span> pd.to_datetime(sample_ts_count[<span class="st">"ts"</span>]) <span class="co"># turning the timestamp column from string to datetime datatype</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>sample_ts_count.head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>          ts   n
+0 2021-01-29   4
+1 2021-01-31   1
+2 2021-02-01   8
+3 2021-02-02  13
+4 2021-02-03  11</code></pre>
+</div>
+</div>
+<p>Now to plot the time series, as a line plot:</p>
+<div class="cell">
+<div class="sourceCode" id="cb17"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px <span class="co"># importing plotly.express to make interactive plots</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a figure for a line chart:</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>fig1 <span class="op">=</span> px.line(sample_ts_count, x <span class="op">=</span> <span class="st">"ts"</span>, y <span class="op">=</span> <span class="st">"n"</span>, title <span class="op">=</span> <span class="st">"Conti Discussions in 2021"</span>, labels <span class="op">=</span> {<span class="st">"n"</span>:<span class="st">"Number of Messages Sent"</span>, <span class="st">"ts"</span>:<span class="st">"Date"</span>}) <span class="co"># A dictionary was used to replace the default x &amp; y labels on the plot</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>fig1.show() <span class="co"># opens up the plot in your web browser</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script src="https://cdn.plot.ly/plotly-2.4.2.min.js"></script>                <div id="830e79df-191a-4186-96e1-94a2743143c6" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("830e79df-191a-4186-96e1-94a2743143c6")) {                    Plotly.newPlot(                        "830e79df-191a-4186-96e1-94a2743143c6",                        [{"hovertemplate":"Date=%{x}<br>Number of Messages Sent=%{y}<extra></extra>","legendgroup":"","line":{"color":"#636efa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"","orientation":"v","showlegend":false,"type":"scatter","x":["2021-01-29T00:00:00","2021-01-31T00:00:00","2021-02-01T00:00:00","2021-02-02T00:00:00","2021-02-03T00:00:00","2021-02-04T00:00:00","2021-02-05T00:00:00","2021-02-08T00:00:00","2021-02-09T00:00:00","2021-02-10T00:00:00","2021-02-11T00:00:00","2021-02-12T00:00:00","2021-02-15T00:00:00","2021-02-16T00:00:00","2021-02-17T00:00:00","2021-02-18T00:00:00","2021-02-19T00:00:00","2021-02-22T00:00:00","2021-02-23T00:00:00","2021-02-24T00:00:00","2021-02-25T00:00:00","2021-02-26T00:00:00","2021-03-01T00:00:00","2021-03-02T00:00:00","2021-03-03T00:00:00","2021-03-04T00:00:00","2021-03-05T00:00:00","2021-03-06T00:00:00","2021-03-07T00:00:00","2021-03-08T00:00:00","2021-03-09T00:00:00","2021-03-10T00:00:00","2021-03-11T00:00:00","2021-03-12T00:00:00","2021-03-15T00:00:00","2021-03-16T00:00:00","2021-03-17T00:00:00","2021-03-18T00:00:00","2021-03-19T00:00:00","2021-03-20T00:00:00","2021-03-21T00:00:00","2021-03-22T00:00:00","2021-03-23T00:00:00","2021-03-24T00:00:00","2021-03-25T00:00:00","2021-03-26T00:00:00","2021-03-27T00:00:00","2021-03-28T00:00:00","2021-03-29T00:00:00","2021-03-30T00:00:00","2021-03-31T00:00:00","2021-04-01T00:00:00","2021-04-03T00:00:00","2021-04-04T00:00:00","2021-04-05T00:00:00","2021-04-06T00:00:00","2021-04-07T00:00:00","2021-04-08T00:00:00","2021-04-09T00:00:00","2021-04-10T00:00:00","2021-04-12T00:00:00","2021-04-13T00:00:00","2021-04-14T00:00:00","2021-04-15T00:00:00","2021-04-16T00:00:00","2021-04-17T00:00:00","2021-04-18T00:00:00","2021-04-19T00:00:00","2021-04-20T00:00:00","2021-04-21T00:00:00","2021-04-22T00:00:00","2021-04-23T00:00:00","2021-04-25T00:00:00","2021-04-26T00:00:00","2021-04-27T00:00:00","2021-04-28T00:00:00","2021-04-29T00:00:00","2021-04-30T00:00:00","2021-05-01T00:00:00","2021-05-02T00:00:00","2021-05-03T00:00:00","2021-05-04T00:00:00","2021-05-05T00:00:00","2021-05-06T00:00:00","2021-05-07T00:00:00","2021-05-08T00:00:00","2021-05-10T00:00:00","2021-05-11T00:00:00","2021-05-12T00:00:00","2021-05-13T00:00:00","2021-05-14T00:00:00","2021-05-15T00:00:00","2021-05-17T00:00:00","2021-05-18T00:00:00","2021-05-19T00:00:00","2021-05-20T00:00:00","2021-05-21T00:00:00","2021-05-22T00:00:00","2021-05-24T00:00:00","2021-05-25T00:00:00","2021-05-26T00:00:00","2021-05-27T00:00:00","2021-05-28T00:00:00","2021-05-29T00:00:00","2021-05-30T00:00:00","2021-05-31T00:00:00","2021-06-01T00:00:00","2021-06-02T00:00:00","2021-06-03T00:00:00","2021-06-04T00:00:00","2021-06-05T00:00:00","2021-06-06T00:00:00","2021-06-07T00:00:00","2021-06-08T00:00:00","2021-06-09T00:00:00","2021-06-10T00:00:00","2021-06-11T00:00:00","2021-06-12T00:00:00","2021-06-14T00:00:00","2021-06-15T00:00:00","2021-06-16T00:00:00","2021-06-17T00:00:00","2021-06-18T00:00:00","2021-06-19T00:00:00","2021-06-21T00:00:00","2021-06-22T00:00:00","2021-06-23T00:00:00","2021-06-24T00:00:00","2021-06-25T00:00:00","2021-06-26T00:00:00","2021-06-27T00:00:00","2021-06-28T00:00:00","2021-06-29T00:00:00","2021-06-30T00:00:00","2021-07-01T00:00:00","2021-07-02T00:00:00","2021-07-03T00:00:00","2021-07-05T00:00:00","2021-07-06T00:00:00","2021-07-07T00:00:00","2021-07-08T00:00:00","2021-07-09T00:00:00","2021-07-10T00:00:00","2021-07-11T00:00:00","2021-07-12T00:00:00","2021-07-13T00:00:00","2021-07-14T00:00:00","2021-07-15T00:00:00","2021-07-16T00:00:00","2021-07-17T00:00:00","2021-07-19T00:00:00","2021-07-20T00:00:00","2021-07-21T00:00:00","2021-07-22T00:00:00","2021-07-23T00:00:00","2021-07-26T00:00:00","2021-07-27T00:00:00","2021-07-28T00:00:00","2021-07-29T00:00:00","2021-07-30T00:00:00","2021-07-31T00:00:00","2021-08-01T00:00:00","2021-08-02T00:00:00","2021-08-03T00:00:00","2021-08-04T00:00:00","2021-08-05T00:00:00","2021-08-06T00:00:00","2021-08-07T00:00:00","2021-08-09T00:00:00","2021-08-10T00:00:00","2021-08-11T00:00:00","2021-08-12T00:00:00","2021-08-13T00:00:00","2021-08-14T00:00:00","2021-08-15T00:00:00","2021-08-16T00:00:00","2021-08-17T00:00:00","2021-08-18T00:00:00","2021-08-19T00:00:00","2021-08-20T00:00:00","2021-08-21T00:00:00","2021-08-22T00:00:00","2021-08-23T00:00:00","2021-08-24T00:00:00","2021-08-25T00:00:00","2021-08-26T00:00:00","2021-08-27T00:00:00","2021-08-28T00:00:00","2021-08-29T00:00:00","2021-08-30T00:00:00","2021-08-31T00:00:00","2021-09-01T00:00:00","2021-09-02T00:00:00","2021-09-03T00:00:00","2021-09-04T00:00:00","2021-09-05T00:00:00","2021-09-06T00:00:00","2021-09-07T00:00:00","2021-09-08T00:00:00","2021-09-09T00:00:00","2021-09-10T00:00:00","2021-09-11T00:00:00","2021-09-12T00:00:00","2021-09-13T00:00:00","2021-09-14T00:00:00","2021-09-15T00:00:00","2021-09-16T00:00:00","2021-09-17T00:00:00","2021-09-19T00:00:00","2021-09-20T00:00:00","2021-09-21T00:00:00","2021-09-22T00:00:00","2021-09-23T00:00:00","2021-09-24T00:00:00","2021-09-25T00:00:00","2021-09-26T00:00:00","2021-09-27T00:00:00","2021-09-28T00:00:00","2021-09-29T00:00:00","2021-09-30T00:00:00","2021-10-01T00:00:00","2021-10-02T00:00:00","2021-10-03T00:00:00","2021-10-04T00:00:00","2021-10-05T00:00:00","2021-10-06T00:00:00","2021-10-07T00:00:00","2021-10-08T00:00:00","2021-10-09T00:00:00","2021-10-11T00:00:00","2021-10-12T00:00:00","2021-10-13T00:00:00","2021-10-14T00:00:00","2021-10-15T00:00:00","2021-10-16T00:00:00","2021-10-17T00:00:00","2021-10-18T00:00:00","2021-10-19T00:00:00","2021-10-20T00:00:00","2021-10-21T00:00:00","2021-10-22T00:00:00","2021-10-23T00:00:00","2021-10-24T00:00:00","2021-10-25T00:00:00","2021-10-26T00:00:00","2021-10-27T00:00:00","2021-10-28T00:00:00","2021-10-29T00:00:00","2021-10-30T00:00:00","2021-10-31T00:00:00","2021-11-01T00:00:00","2021-11-02T00:00:00","2021-11-03T00:00:00","2021-11-04T00:00:00","2021-11-05T00:00:00","2021-11-06T00:00:00","2021-11-07T00:00:00","2021-11-08T00:00:00","2021-11-09T00:00:00","2021-11-10T00:00:00","2021-11-11T00:00:00","2021-11-12T00:00:00","2021-11-13T00:00:00","2021-11-14T00:00:00","2021-11-15T00:00:00","2021-11-16T00:00:00","2021-11-17T00:00:00","2021-11-18T00:00:00","2021-11-19T00:00:00","2021-11-20T00:00:00","2021-11-21T00:00:00","2021-11-22T00:00:00","2021-11-23T00:00:00","2021-11-24T00:00:00","2021-11-25T00:00:00","2021-11-26T00:00:00","2021-11-27T00:00:00","2021-11-29T00:00:00","2021-11-30T00:00:00","2021-12-01T00:00:00","2021-12-02T00:00:00","2021-12-03T00:00:00","2021-12-04T00:00:00","2021-12-05T00:00:00","2021-12-06T00:00:00","2021-12-07T00:00:00","2021-12-08T00:00:00","2021-12-09T00:00:00","2021-12-10T00:00:00","2021-12-11T00:00:00","2021-12-12T00:00:00","2021-12-13T00:00:00","2021-12-14T00:00:00","2021-12-15T00:00:00","2021-12-16T00:00:00","2021-12-17T00:00:00","2021-12-18T00:00:00","2021-12-20T00:00:00","2021-12-21T00:00:00","2021-12-22T00:00:00","2021-12-23T00:00:00","2021-12-24T00:00:00","2021-12-25T00:00:00","2021-12-27T00:00:00","2021-12-28T00:00:00","2021-12-29T00:00:00","2021-12-30T00:00:00","2021-12-31T00:00:00","2022-01-02T00:00:00","2022-01-03T00:00:00","2022-01-04T00:00:00","2022-01-05T00:00:00","2022-01-06T00:00:00","2022-01-07T00:00:00","2022-01-08T00:00:00","2022-01-09T00:00:00","2022-01-10T00:00:00","2022-01-11T00:00:00","2022-01-12T00:00:00","2022-01-13T00:00:00","2022-01-14T00:00:00","2022-01-15T00:00:00","2022-01-16T00:00:00","2022-01-17T00:00:00","2022-01-18T00:00:00","2022-01-19T00:00:00","2022-01-20T00:00:00","2022-01-21T00:00:00","2022-01-22T00:00:00","2022-01-23T00:00:00","2022-01-24T00:00:00","2022-01-25T00:00:00","2022-01-26T00:00:00","2022-01-27T00:00:00","2022-01-28T00:00:00","2022-01-29T00:00:00","2022-01-31T00:00:00","2022-02-01T00:00:00","2022-02-02T00:00:00","2022-02-03T00:00:00","2022-02-04T00:00:00","2022-02-05T00:00:00","2022-02-06T00:00:00","2022-02-07T00:00:00","2022-02-08T00:00:00","2022-02-09T00:00:00","2022-02-10T00:00:00","2022-02-11T00:00:00","2022-02-14T00:00:00","2022-02-15T00:00:00","2022-02-16T00:00:00","2022-02-17T00:00:00","2022-02-18T00:00:00","2022-02-19T00:00:00","2022-02-20T00:00:00","2022-02-21T00:00:00","2022-02-22T00:00:00","2022-02-23T00:00:00","2022-02-24T00:00:00","2022-02-25T00:00:00","2022-02-26T00:00:00","2022-02-27T00:00:00"],"xaxis":"x","y":[4,1,8,13,11,5,5,6,2,2,2,2,2,16,3,6,11,6,4,8,17,17,3,6,13,20,14,7,2,24,18,12,9,31,13,13,18,9,26,1,3,5,16,25,13,10,5,1,14,16,6,31,1,1,22,11,8,7,18,1,11,11,6,16,12,5,1,15,9,20,12,6,1,10,5,14,3,43,9,3,4,11,19,23,17,1,36,29,10,21,10,1,20,23,5,17,11,2,17,14,9,8,21,1,3,5,17,12,20,27,17,1,24,35,32,18,22,3,10,19,31,22,15,1,1,26,26,13,25,3,1,52,15,18,15,20,1,65,19,13,14,13,5,2,14,18,32,19,35,6,30,14,23,29,21,20,25,24,26,15,4,1,16,16,11,8,12,1,3,26,10,19,34,1,1,36,22,14,10,17,1,1,7,5,10,24,101,8,3,91,125,28,68,34,4,1,21,40,17,24,23,1,6,23,47,21,25,8,6,16,15,13,17,5,2,1,18,23,12,24,8,4,4,33,27,44,25,24,28,33,32,29,16,44,4,3,21,77,29,37,75,5,6,50,28,30,17,20,3,3,29,28,26,12,25,5,10,25,15,33,46,48,1,16,31,36,27,24,40,5,8,31,70,37,27,29,3,42,53,114,39,41,26,2,56,50,14,14,53,4,34,53,14,13,30,15,2,6,21,12,18,7,9,30,32,11,1,2,3,1,2,3,2,2,5,2,10,13,6,13,5,1,2,11,5,2,16,9,3,27,11,15,10,19,11,7,20,11,13,18,9,4,9,7,15,3,20,6,8,12,9,10,2,4,1,24,16,11,1,3,2,3],"yaxis":"y"}],                        {"legend":{"tracegroupgap":0},"template":{"data":{"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"#E5ECF6","showlakes":true,"showland":true,"subunitcolor":"white"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2}}},"title":{"text":"Conti Discussions in 2021"},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Date"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Number of Messages Sent"}}},                        {"responsive": true}                    )                };                            </script>        </div>
+</div>
+</div>
+<p>Observation: In the interactive line plot, there is a toolbar at the top right of the page with multiple icons. By selecting:</p>
+<ul>
+<li><p>“Zoom”, we can zoom in by clicking &amp; dragging over the line plot</p></li>
+<li><p>“Pan”, we can move the plot around</p></li>
+<li><p>“Reset axes”, we can return to seeing the entire plot</p></li>
+</ul>
+</section>
+<section id="user-activity" class="level2">
+<h2 class="anchored" data-anchor-id="user-activity">User Activity</h2>
+<p>Although they used a different code, the Microsoft 365 Defender Research Team also made a simple horizontal bar graph for individual user activity.</p>
+<div class="cell">
+<div class="sourceCode" id="cb18"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>sample_from_count <span class="op">=</span> count(sample, <span class="st">"from"</span>) <span class="co"># making a dataframe with the number of messages sent by each user under the "from" column</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>sample_from_count <span class="op">=</span> sample_from_count.sort_values(by <span class="op">=</span> <span class="st">'n'</span>) <span class="co"># sorting the rows by high to low "n" counts</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a figure for a horizontal bar plot:</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>fig2 <span class="op">=</span> px.bar(sample_from_count, x <span class="op">=</span> <span class="st">"n"</span>, y <span class="op">=</span> <span class="st">"from"</span>, orientation<span class="op">=</span><span class="st">'h'</span>, title <span class="op">=</span> <span class="st">"Conti Hacker Activeness"</span>, labels <span class="op">=</span> {<span class="st">"from"</span>:<span class="st">"Username"</span>, <span class="st">"n"</span>:<span class="st">"Number of Messages sent"</span>}) <span class="co"># Orientation was set to "h" for horizontal, and a dictionary was used to replace the default x &amp; y labels on the plot.</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>fig2.show() <span class="co"># opens up the plot in your web browser</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script src="https://cdn.plot.ly/plotly-2.4.2.min.js"></script>                <div id="c48a783a-56c4-415c-a14e-ad19e7c956ee" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("c48a783a-56c4-415c-a14e-ad19e7c956ee")) {                    Plotly.newPlot(                        "c48a783a-56c4-415c-a14e-ad19e7c956ee",                        [{"alignmentgroup":"True","hovertemplate":"Number of Messages sent=%{x}<br>Username=%{y}<extra></extra>","legendgroup":"","marker":{"color":"#636efa","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"h","showlegend":false,"textposition":"auto","type":"bar","x":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,5,5,5,5,5,6,6,6,6,6,6,6,6,6,7,7,7,7,7,8,8,8,8,8,9,9,9,10,10,12,12,13,13,13,13,13,14,14,14,16,16,16,17,18,18,19,24,25,27,28,29,30,30,32,34,34,36,40,42,42,43,43,50,50,51,52,52,54,56,58,59,65,69,75,78,99,100,123,151,160,166,169,233,294,301,317,327,426,469,813],"xaxis":"x","y":["sepvilk","klaus","romanov","glad","qwerty","prizrak","price","freebeer","serp","frank","netman","mushroom","miguel","duna","master","eleos","flint","forum","shell","firefox333","urbanone","tatarin","tort","tunri","graf","b2zbrzj5sljbmemgfqnn7zlarduyjhvjwt","wowddoz","admintest","alter","meatball","merch","grafin","mozart","idgo","answer","vampire","macallan","globus","porovoz","bullet","blackjob","skywalker","gm","bonen","bill","starfall","guava","subzero","gorec","batka","hlor","chip","sentinel","gus","kent","ganesh","cruz","dick","nik-da","grajdanin","cherry","cert","snow","swift","bash","fast","kramer","nevada","paranoik","sonar","spoon","tiniles","admin","jumbo","gold","bekeeper","beta","elon","boby","andy","cosmos","dylon","alarm2","zolotoy","dino","neo","atlas","twin","johnyboy77","taker","mult","zevs","azot","wertu","mont","elvira","fatboy","grand","logan","stakan","chain","sticks","flip","dominik","void","buran","cheesecake","modnik","mavemat","mentos","carter","braun","van","wind","rozetka","professor","kevin","axel","rand","steller","kagas","leo","tiktak","hors","lemur","dandis","hash","viper","demon","derek","strix","ali","salamandra","tom","sunday","netwalker","begemot","baget","specter","ghost","derekson","buza","green","ramon","ford","love","revers","pin","terry","best","zulas","cybergangster","dollar","grant","reshaev","pumba","many","grom","skippy","bentley","tramp","bloodrush","hof","veron","ttrr","bio","mango","driver","stern","defender"],"yaxis":"y"}],                        {"barmode":"relative","legend":{"tracegroupgap":0},"template":{"data":{"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"#E5ECF6","showlakes":true,"showland":true,"subunitcolor":"white"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2}}},"title":{"text":"Conti Hacker Activeness"},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Number of Messages sent"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Username"}}},                        {"responsive": true}                    )                };                            </script>        </div>
+</div>
+</div>
+<p>Observation: For this plot, without zooming in far enough, we will not be able to see all of the usernames on the y axis.</p>
+</section>
+<section id="searching-for-iocs" class="level2">
+<h2 class="anchored" data-anchor-id="searching-for-iocs">Searching for IOCs</h2>
+<p>IOCs are <em>Indicators of Compromise</em>, items related to cyber threats. Impressively, there is a package, <em>icoextract</em>, with functions meant to find from strings of text, different kinds of IOCs, like ip addresses, urls, bitcoin addresses, etc. The functions from icoextract however, produce <em>itertools chain objects</em>, which can only accessed through use of iteration (Ex. For loops).</p>
+<p>Next, we will search for ip addresses and the messages that they appeared in. They will be put into a nested list, which has lists within a list. This is one of the formats that pandas’s DataFrame() function was designed to be capable of transforming into a dataframe.</p>
+<div class="cell">
+<div class="sourceCode" id="cb19"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> iocextract</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>ipv4s <span class="op">=</span> [] <span class="co"># initializing a list to hold internet protocols </span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> sample[<span class="st">"body"</span>]: <span class="co"># looping through the entries in the "body" column of the dataframe</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> ips <span class="kw">in</span> iocextract.extract_ipv4s(data <span class="op">=</span> i, refang <span class="op">=</span> <span class="va">False</span>): <span class="co"># for every ip address (4th version) found by the extract_ipv4s() function in this row...</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    ipv4s.append([ips, i]) <span class="co"># append the ip address found &amp; the message it came from, into the initialized list, as a list itself</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>ip_vs_text <span class="op">=</span> pd.DataFrame(ipv4s, columns <span class="op">=</span> [<span class="st">"ip"</span>,<span class="st">"body"</span>]) <span class="co"># turning the nested list into a dataframe with custom column names</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>ip_vs_text <span class="op">=</span> ip_vs_text.drop_duplicates(subset<span class="op">=</span><span class="st">'ip'</span>, keep<span class="op">=</span><span class="st">"first"</span>) <span class="co"># dropping rows with duplicate ip addresses, keeping only the first of these duplicates</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>ip_vs_text.head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>               ip                                               body
+0   54.183.140.39   yep, they all worked\nexcept\nbot\n54.183.140.39
+1   73.180.36.152              Perepni 73.180.36.152\n208.125.46.162
+2  208.125.46.162              Perepni 73.180.36.152\n208.125.46.162
+3   186.72.79.132  &lt;mango&gt; waiting..\n[23:50:56] &lt;mango&gt; &lt;wrdland...
+4  128.199.196.59                   https://128.199.196.59:13305/adm</code></pre>
+</div>
+</div>
+<p>Explanation: It is possible that the same ip address may come from different rows of text, and these different rows of text may contain valuable information. But in the above code chunk, every duplicate ip address aside from the first was removed, along with the texts corresponding to them, because for what we will do next, duplicate ip addresses are not necessary.</p>
+<p>Having the ip addresses alone doesn’t tell us much. So next, we will try to map the ip addresses by finding their corresponding latitudes and longitudes. There are a few databases online that can be used to match ip addresses to real-world locations. The <em>requests</em> packages has functions that allow us to get data from those websites. The one being used in the following code chunk is: <em>https://geolocation-db.com/</em></p>
+<div class="cell">
+<div class="sourceCode" id="cb21"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests <span class="co"># to make requests to websites</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json <span class="co"># to read or load json files</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>ip_info <span class="op">=</span> [] <span class="co"># initializing a list to carry information about each ip address</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ip <span class="kw">in</span> ip_vs_text[<span class="st">"ip"</span>]: </span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># making the url string to which we will send the request by combining the website &amp; an ip address:</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  request_url <span class="op">=</span> <span class="st">'https://geolocation-db.com/jsonp/'</span> <span class="op">+</span> ip </span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sending the request to get data back from the url &amp; putting the response (data) in a variable:</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  response <span class="op">=</span> requests.get(request_url)</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># decoding the response:</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  result <span class="op">=</span> response.content.decode()</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># the decoded response is in the form of a dictionary with parentheses around it. Stripping the outer parentheses away:</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  result <span class="op">=</span> result.split(<span class="st">"("</span>)[<span class="dv">1</span>].strip(<span class="st">")"</span>)</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># reading the response's text and turning it into an actual dictionary:</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>  result <span class="op">=</span> json.loads(result)</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># taking only the results we may be interested in and appending them into a nested list:</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>  ip_info.append([result[<span class="st">'country_code'</span>], result[<span class="st">'country_name'</span>], result[<span class="st">'city'</span>], result[<span class="st">'postal'</span>], result[<span class="st">'latitude'</span>], result[<span class="st">'longitude'</span>], result[<span class="st">'IPv4'</span>], result[<span class="st">'state'</span>]])</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Turning the nested list into a dataframe with custom column names:</span></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>ip_info <span class="op">=</span> pd.DataFrame(ip_info, columns<span class="op">=</span>[<span class="st">'country_code'</span>, <span class="st">'country_name'</span>, <span class="st">'city'</span>, <span class="st">'postal'</span>, <span class="st">'latitude'</span>, <span class="st">'longitude'</span>, <span class="st">'ip'</span>, <span class="st">'state'</span>]) </span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>ip_info.head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>  country_code  ...                                            state
+0           US  ...                                       California
+1           US  ...                                           Oregon
+2           US  ...                                         New York
+3           PA  ...                              Provincia de Panama
+4           SG  ...  Central Singapore Community Development Council
+
+[5 rows x 8 columns]</code></pre>
+</div>
+</div>
+<p>There are rows in the dataframe where no information, not even the ip address is found. These rows will be removed:</p>
+<div class="cell">
+<div class="sourceCode" id="cb23"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>ip_info_found <span class="op">=</span> ip_info[ip_info[<span class="st">'ip'</span>] <span class="op">!=</span> <span class="st">"IP Not found"</span>] <span class="co"># getting only the rows where ip address does not equal "IP Not found"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>With longitude and latitude, we can make these ip addresses points on a graph. If possible, we want there to be some information provided when we hover over these points. That is why we will create a “text” column to contain customize text that we want to show:</p>
+<div class="cell">
+<div class="sourceCode" id="cb24"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>ip_info_found[<span class="st">"text"</span>] <span class="op">=</span> ip_info_found[<span class="st">"country_name"</span>] <span class="op">+</span> <span class="st">", "</span> <span class="op">+</span> ip_info_found[<span class="st">"city"</span>] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>&lt;string&gt;:1: SettingWithCopyWarning:
+
+
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy</code></pre>
+</div>
+</div>
+<p>Making a map using <em>plotly</em> package:</p>
+<div class="cell">
+<div class="sourceCode" id="cb26"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.graph_objects <span class="im">as</span> go <span class="co"># required to make the map</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>fig3 <span class="op">=</span> go.Figure(data <span class="op">=</span> go.Scattergeo(</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>        lon <span class="op">=</span> ip_info_found[<span class="st">'longitude'</span>], <span class="co"># telling the function which column has the longitude values</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>        lat <span class="op">=</span> ip_info_found[<span class="st">'latitude'</span>], <span class="co"># telling the function which column has the latitude values</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>        text <span class="op">=</span> ip_info_found[<span class="st">'text'</span>], <span class="co"># setting the text to show when mouse hovers over the points</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>        mode <span class="op">=</span> <span class="st">'markers'</span> <span class="co"># deciding the drawing mode</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>        ))</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>fig3.update_layout( <span class="co"># updating the figure's layout</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>        title <span class="op">=</span> <span class="st">'Possible targets of Conti Group'</span>, <span class="co"># adding a title</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script src="https://cdn.plot.ly/plotly-2.4.2.min.js"></script>                <div id="c117ecd3-d4d7-456b-ba86-b8c0752f8bf5" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("c117ecd3-d4d7-456b-ba86-b8c0752f8bf5")) {                    Plotly.newPlot(                        "c117ecd3-d4d7-456b-ba86-b8c0752f8bf5",                        [{"lat":[37.3388,45.5472,42.2386,8.9936,1.2931,40.7975,32.9652,37.751,42.6394,30.0918,37.751,46,59.3059,37.751,51.5161,46,40.6152,37.751,-17,47.3667,20,20,26.9167,25.45,30.3783,30.3783,20,30.9,20,20,55.7386,55.7386,37.3387,37.3387,37.3387,37.751,37.751,37.3387,46,55.7386,20,50.45,42.8864,44.9572,37.3387,56],"lon":[-121.8914,-122.5001,-77.2066,-79.5197,103.8558,-73.9683,-117.1213,-97.822,-84.5242,-97.8534,-97.822,25,17.9872,-97.822,-0.0949,25,-74.415,-97.822,-65,8.55,77,77,75.8167,81.85,76.7808,76.7808,77,75.85,77,77,37.6068,37.6068,-121.8914,-121.8914,-121.8914,-97.822,-97.822,-121.8914,25,37.6068,77,30.5233,-78.8781,34.1108,-121.8914,24],"mode":"markers","text":["United States, San Jose","United States, Portland","United States, Campbell","Panama, Panama City","Singapore, Singapore","United States, New York","United States, San Diego",null,"United States, Holt","United States, Buda",null,null,"Sweden, Haegersten",null,"United Kingdom, London",null,"United States, Plainfield",null,null,"Switzerland, Zurich",null,null,"India, Jaipur","India, Allahabad","India, Ambala","India, Ambala",null,"India, Ludhiana",null,null,null,null,"United States, San Jose","United States, San Jose","United States, San Jose",null,null,"United States, San Jose",null,null,null,null,"United States, Buffalo","Ukraine, Simferopol","United States, San Jose",null],"type":"scattergeo"}],                        {"template":{"data":{"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"#E5ECF6","showlakes":true,"showland":true,"subunitcolor":"white"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2}}},"title":{"text":"Possible targets of Conti Group"}},                        {"responsive": true}                    )                };                            </script>        </div>
+</div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>fig3.update_geos(</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    projection_type<span class="op">=</span><span class="st">"orthographic"</span>, <span class="co"># makes the world map turn from flat to a globe</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    showcountries<span class="op">=</span><span class="va">True</span>, countrycolor<span class="op">=</span><span class="st">"Black"</span>, <span class="co"># gives country lines to the world map</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">#showcoastlines=True, coastlinecolor="Brown",</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    showocean<span class="op">=</span><span class="va">True</span>, oceancolor<span class="op">=</span><span class="st">"LightBlue"</span>,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">#showlakes=True, lakecolor="LightBlue",</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">#showrivers=True, rivercolor="LightBlue"</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>) <span class="co"># if rendered in RStudio, this line of code will produce a visualization too</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co">#fig3.show() # opens the figure in browser</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script src="https://cdn.plot.ly/plotly-2.4.2.min.js"></script>                <div id="97476357-f33d-455c-8374-f17574efe20e" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("97476357-f33d-455c-8374-f17574efe20e")) {                    Plotly.newPlot(                        "97476357-f33d-455c-8374-f17574efe20e",                        [{"lat":[37.3388,45.5472,42.2386,8.9936,1.2931,40.7975,32.9652,37.751,42.6394,30.0918,37.751,46,59.3059,37.751,51.5161,46,40.6152,37.751,-17,47.3667,20,20,26.9167,25.45,30.3783,30.3783,20,30.9,20,20,55.7386,55.7386,37.3387,37.3387,37.3387,37.751,37.751,37.3387,46,55.7386,20,50.45,42.8864,44.9572,37.3387,56],"lon":[-121.8914,-122.5001,-77.2066,-79.5197,103.8558,-73.9683,-117.1213,-97.822,-84.5242,-97.8534,-97.822,25,17.9872,-97.822,-0.0949,25,-74.415,-97.822,-65,8.55,77,77,75.8167,81.85,76.7808,76.7808,77,75.85,77,77,37.6068,37.6068,-121.8914,-121.8914,-121.8914,-97.822,-97.822,-121.8914,25,37.6068,77,30.5233,-78.8781,34.1108,-121.8914,24],"mode":"markers","text":["United States, San Jose","United States, Portland","United States, Campbell","Panama, Panama City","Singapore, Singapore","United States, New York","United States, San Diego",null,"United States, Holt","United States, Buda",null,null,"Sweden, Haegersten",null,"United Kingdom, London",null,"United States, Plainfield",null,null,"Switzerland, Zurich",null,null,"India, Jaipur","India, Allahabad","India, Ambala","India, Ambala",null,"India, Ludhiana",null,null,null,null,"United States, San Jose","United States, San Jose","United States, San Jose",null,null,"United States, San Jose",null,null,null,null,"United States, Buffalo","Ukraine, Simferopol","United States, San Jose",null],"type":"scattergeo"}],                        {"geo":{"countrycolor":"Black","oceancolor":"LightBlue","projection":{"type":"orthographic"},"showcountries":true,"showocean":true},"template":{"data":{"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"#E5ECF6","showlakes":true,"showland":true,"subunitcolor":"white"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2}}},"title":{"text":"Possible targets of Conti Group"}},                        {"responsive": true}                    )                };                            </script>        </div>
+</div>
+</div>
+<p>Out of interest for what webpages conti hackers visit, we also searched for urls in the dataset:</p>
+<div class="cell">
+<div class="sourceCode" id="cb28"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>urls <span class="op">=</span> [] <span class="co"># initializing a list for urls</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> sample[<span class="st">"body"</span>]: <span class="co"># looping through the "body" column of the dataset</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> url <span class="kw">in</span> iocextract.extract_urls(data <span class="op">=</span> i, refang <span class="op">=</span> <span class="va">False</span>): <span class="co"># # this lines means: for every url found by the extract_url() function in this row...</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    urls.append([url, i]) <span class="co"># nesting each url and the text where the url was found, as a list, to the list</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>url_vs_text <span class="op">=</span> pd.DataFrame(urls, columns<span class="op">=</span>[<span class="st">"url"</span>, <span class="st">"body"</span>]) <span class="co"># Turning the nested list into a dataframe with custom column names</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>url_vs_text <span class="op">=</span> url_vs_text.drop_duplicates(keep<span class="op">=</span><span class="st">"first"</span>) <span class="co"># dropping duplicate rows, only keeping the first</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>url_vs_text.head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>                                       url                                               body
+0        https://qaz.im/load/3EZGA7/4SEstA                  https://qaz.im/load/3EZGA7/4SEstA
+1  https://privnote.com/8VJI0cIB#iceMvPeFP            https://privnote.com/8VJI0cIB#iceMvPeFP
+2  https://privnote.com/NaexkW17#VTY75x2Ih            https://privnote.com/NaexkW17#VTY75x2Ih
+3                   https://prnt.sc/wh26qd  panel:\n\nhttps://prnt.sc/wh26qd\nhttps://prnt...
+4                   https://prnt.sc/wh26rb  panel:\n\nhttps://prnt.sc/wh26qd\nhttps://prnt...</code></pre>
+</div>
+</div>
+<p>Note: Although duplicate rows were removed, the same url may still appear in rows with different text under the “body” column.</p>
+</section>
+<section id="frequency-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="frequency-analysis">Frequency Analysis</h2>
+<p>Most of the information in the Conti chat logs is in their messages. But there are many messages, and the lengths and subjects of the messages can change erratically. Checking each message one by one will be time-consuming and difficult. The <em>tidytext</em> package contains functions that make it easier to analyze text in dataframes. For example: - <em>unnest_tokens()</em>, which splits cells of text in dataframes into one-token-per-row while preserving the data in other columns - <em>bind_tf_idf()</em>, which can calculate the frequency of terms and find possibly important words The <em>tidytext</em> library exists in both R and Python. It can be found at: <em>https://pypi.org/project/tidytext/</em></p>
+<div class="cell">
+<div class="sourceCode" id="cb30"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tidytext</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tidytext <span class="im">import</span> unnest_tokens, bind_tf_idf <span class="co"># to run unnest_token, plyr may have to be installed on terminal</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>sample_unnested <span class="op">=</span> unnest_tokens(sample, <span class="st">"word"</span>, <span class="st">"body"</span>) <span class="co"># unnesting the text in the "body" column into single tokens under a "word" column</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>sample_unnested.head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>           ts   from     to     word
+4  2021-01-29  price  green     have
+4  2021-01-29  price  green      the
+4  2021-01-29  price  green     pads
+4  2021-01-29  price  green  changed
+4  2021-01-29  price  green    again</code></pre>
+</div>
+</div>
+<p>We still can’t determine much from seeing the dataframe like this. Next, we will count how many times each token or term appeared in the dataset:</p>
+<div class="cell">
+<div class="sourceCode" id="cb32"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>sample_word_count <span class="op">=</span> count(sample_unnested, <span class="st">"word"</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>sample_word_count</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>                 word    n
+0                   0    6
+1                  00    1
+2                 000    1
+3                0000    1
+4       0000000000000    1
+...               ...  ...
+5664  ———————————————    7
+5665                ’  135
+5666                “    2
+5667                ”    2
+5668               ◻️    1
+
+[5669 rows x 2 columns]</code></pre>
+</div>
+</div>
+<p>Observation: There are many words that have relatively less meaning; For example, stopwords, frequently used words like: “a”, “to”, “are”. And for our analysis, words that do not appear often probably won’t have much weight. Such words can be filtered out.</p>
+<div class="cell">
+<div class="sourceCode" id="cb34"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> nltk</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>nltk.download(<span class="st">"punkt"</span>) <span class="co"># downloaded a sentence tokenizer, which only has to be done once</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>True
+
+[nltk_data] Downloading package punkt to
+[nltk_data]     C:\Users\jliu2\AppData\Roaming\nltk_data...
+[nltk_data]   Package punkt is already up-to-date!</code></pre>
+</div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.corpus <span class="im">import</span> stopwords <span class="co"># importing stopwords (contains various languages of stopwords)</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>stopwords <span class="op">=</span> stopwords.words(<span class="st">'english'</span>) <span class="co"># getting a list of english stopwords</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>sample_word_count_nostop <span class="op">=</span> sample_word_count[<span class="op">~</span>sample_word_count[<span class="st">'word'</span>].isin(stopwords)] <span class="co"># removing any row whose word is in the list of stopwords</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>sample_word_count_nostop2 <span class="op">=</span> sample_word_count_nostop[sample_word_count_nostop[<span class="st">"n"</span>] <span class="op">&gt;</span> <span class="dv">1</span>] <span class="co"># filtering for words that appear more than once</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>sample_word_count_nostop2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>                           word    n
+0                             0    6
+5     0000000000000000000000000    6
+20                         0017    2
+22                         0020    2
+23                         0021    2
+...                         ...  ...
+5663                          »    2
+5664            ———————————————    7
+5665                          ’  135
+5666                          “    2
+5667                          ”    2
+
+[2164 rows x 2 columns]</code></pre>
+</div>
+</div>
+<p>There are also a lot of words that seem meaningless. The may represent something, but we are unable to tell. Instead, they will only get in the way of our text analysis. It is too difficult to figure out a regular expression that can represent and remove all these incomprehensible terms.</p>
+<p>So instead, to get only comprehensible words from the dataframe, the terms in the table will be matched to an english word list from <em>nltk</em>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb38"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.corpus <span class="im">import</span> words</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>word_list <span class="op">=</span> words.words() <span class="co"># getting a list of 236759 english words from nltk</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co"># adding custom words to the word_list. These are the translations of the previously mentioned slang words, and some words that may not be in the nltk word list.</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>word_list <span class="op">=</span> word_list <span class="op">+</span> [<span class="st">"AD"</span>, <span class="st">"DA"</span>, <span class="st">"host"</span>, <span class="st">"hosts"</span>, <span class="st">"bitcoin"</span>, <span class="st">"crypto"</span>, <span class="st">"cryptocurrency"</span>, <span class="st">"credentials"</span>, <span class="st">"WMIC"</span>, <span class="st">"network"</span>, <span class="st">"mimikatz"</span>, <span class="st">"firewall"</span>, <span class="st">"SQL"</span>, <span class="st">"shares"</span>, <span class="st">"Citrix"</span>, <span class="st">"FUD"</span>, <span class="st">"shellcode"</span>, <span class="st">"cash"</span>, <span class="st">"jabber"</span>, <span class="st">"Emotet"</span>, <span class="st">"Trickbot"</span>, <span class="st">"BazarBackdoor"</span>, <span class="st">"Ryuk"</span>, <span class="st">"decrypted"</span>, <span class="st">"decrypt"</span>, <span class="st">"message"</span>, <span class="st">"bro"</span>, <span class="st">"error"</span>, <span class="st">"encrypted"</span>, <span class="st">"encrypt"</span>, <span class="st">"trends"</span>, <span class="st">"admin"</span>] </span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>sample_word_count_nostop2 <span class="op">=</span> sample_word_count_nostop2[sample_word_count_nostop2[<span class="st">'word'</span>].isin(word_list)] <span class="co"># removing any row whose words are not in the word_list</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>sample_word_count_nostop2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>          word   n
+759         aa   2
+764    ability   3
+765       able   3
+777     accept   5
+778   accepted  20
+...        ...  ..
+5591       yet  33
+5597        yo  10
+5623     youve   3
+5633       yus   2
+5641        za   3
+
+[1212 rows x 2 columns]</code></pre>
+</div>
+</div>
+<p>If we can compare the frequency of the words, then we may be able to tell what subjects are more important to the hackers, or what they focus more on. To indicate the frequency of each word, we can use a Wordcloud. To use the <em>WordCloud()</em> function from the <em>wordcloud</em> package, we need to input all our words as a string. In the following code chunk, we will assemble that string and make a Wordcloud:</p>
+<div class="cell">
+<div class="sourceCode" id="cb40"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>all_words_string <span class="op">=</span> <span class="st">" "</span>.join(sample_word_count_nostop2[<span class="st">"word"</span>]) <span class="co"># joining all the words in the list of all words into a single string with a single space in between each word</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> wordcloud <span class="im">import</span> WordCloud</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt <span class="co"># required to show the wordcloud</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>plt.subplots(figsize <span class="op">=</span> (<span class="dv">8</span>,<span class="dv">8</span>)) <span class="co"># setting/reserving a space to put the figure that will contain the WordCloud</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>(&lt;Figure size 800x800 with 1 Axes&gt;, &lt;AxesSubplot:&gt;)</code></pre>
+</div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>wordcloud <span class="op">=</span> WordCloud ( <span class="co"># making the WordCloud</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>                    background_color <span class="op">=</span> <span class="st">'white'</span>, <span class="co"># setting the background color</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>                    width <span class="op">=</span> <span class="dv">1000</span>, <span class="co"># setting the width of the figure</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>                    height <span class="op">=</span> <span class="dv">1000</span>, <span class="co"># setting the heigth of the figure</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>                    max_words <span class="op">=</span> <span class="dv">100</span>, <span class="co"># setting the maximum number of words that can enter the word list</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>                    collocations <span class="op">=</span> <span class="va">False</span> <span class="co"># this argument prevent words from being repeated in the wordcloud</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>                        ).generate(all_words_string) <span class="co"># telling the function which string of words to build the wordcloud from</span></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>                        </span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>plt.imshow(wordcloud) <span class="co"># to read/input the wordcloud data into an image</span></span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">'off'</span>) <span class="co"># to prevent x &amp; y axes from appearing</span></span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a><span class="co">#plt.savefig('Plotly_Word_Cloud.png') # to save the figure as a png file in the current directory</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>(-0.5, 999.5, 999.5, -0.5)</code></pre>
+</div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>plt.show() <span class="co"># shows the figure as an output</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Data_Processing_with_Python_Student_Friendly_Version_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="768"></p>
+</div>
+</div>
+<p>But it isn’t always certain that the most frequently mentioned words are the most important words. To find the most important words, we will try calculating <em>tf_idf</em>.</p>
+<p>“<em>tf_idf</em>” is the <em>product</em> of <em>term frequency</em> and <em>inverse document frequency</em>. It decreases for words that are more commonly found in the documents and increases for words that are more rarely used. It can be used to rank the importance of the terms.</p>
+<p>The <em>bind_tf_idf()</em> function calculates tf_idf. But to use it, we must first have a column in our dataframe to treat as documents (in the following code check, we will use dates), and counts of each word:</p>
+<div class="cell">
+<div class="sourceCode" id="cb45"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Counting the number of times each word appears each day:</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>sample_word_per_file <span class="op">=</span> count(sample_unnested, <span class="st">"ts"</span>, <span class="st">"word"</span>)</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating tf_idf using the bind_tf_idf() function:</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>sample_tf_idf <span class="op">=</span> bind_tf_idf(sample_word_per_file, <span class="st">"word"</span>, <span class="st">"ts"</span>, <span class="st">"n"</span>)</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Sorting dataframe by descending tf_idf:</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>sample_tf_idf_sorted <span class="op">=</span> sample_tf_idf.sort_values(by<span class="op">=</span><span class="st">'tf_idf'</span>, ascending <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>sample_tf_idf_sorted.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>               ts      word  n        tf       idf    tf_idf
+25278  2022-02-26  hahahaha  1  0.500000  5.891644  2.945822
+22973  2022-01-06      3112  1  0.500000  5.891644  2.945822
+4082   2021-05-03        au  1  0.333333  5.891644  1.963881
+386    2021-02-17       123  2  0.500000  3.812203  1.906101
+22929  2022-01-03  password  1  0.500000  3.119055  1.559528</code></pre>
+</div>
+</div>
+<p>Next, we’ll remove the stopwords:</p>
+<div class="cell">
+<div class="sourceCode" id="cb47"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>sample_tf_idf_nostop <span class="op">=</span> sample_tf_idf_sorted[<span class="op">~</span>sample_tf_idf_sorted[<span class="st">'word'</span>].isin(stopwords)] <span class="co"># removing any row whose words are in the list of stopwords</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>sample_tf_idf_nostop[<span class="st">"word"</span>].head(<span class="dv">5</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>25278    hahahaha
+22973        3112
+4082           au
+386           123
+22929    password
+Name: word, dtype: object</code></pre>
+</div>
+</div>
+<p>There are still too many unreadable terms. Since we can’t interpret anything from them right now, we will remove them:</p>
+<div class="cell">
+<div class="sourceCode" id="cb49"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>sample_tf_idf_nostop2 <span class="op">=</span> sample_tf_idf_nostop[sample_tf_idf_nostop[<span class="st">'word'</span>].isin(word_list)] <span class="co"># removing any row whose words are not in the word_list</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>sample_tf_idf_nostop2.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-stdout">
+<pre><code>               ts      word  n        tf       idf    tf_idf
+22929  2022-01-03  password  1  0.500000  3.119055  1.559528
+25268  2022-02-24    convey  1  0.250000  5.891644  1.472911
+25018  2022-02-20       yes  1  1.000000  1.448993  1.448993
+12     2021-01-31       yes  1  1.000000  1.448993  1.448993
+8601   2021-07-03     green  2  0.333333  4.099885  1.366628</code></pre>
+</div>
+</div>
+<p>Using the <em>plotly</em> package to create a horizontal bar plot of the words with the highest tf_idf and possibly highest importance:</p>
+<div class="cell">
+<div class="sourceCode" id="cb51"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating the bar plot's figure</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>fig4 <span class="op">=</span> px.bar(sample_tf_idf_nostop2.head(<span class="dv">30</span>), x <span class="op">=</span> <span class="st">"tf_idf"</span>, y <span class="op">=</span> <span class="st">"word"</span>, orientation<span class="op">=</span><span class="st">'h'</span>, title <span class="op">=</span> <span class="st">"Possibly Important Words in Conti Messages"</span>, labels <span class="op">=</span> {<span class="st">"word"</span>:<span class="st">"Word"</span>, <span class="st">"tf_idf"</span>:<span class="st">"Importance by tf_idf"</span>}) <span class="co"># setting orientation to "h" for a horizontal bar plot and using a python dictionary to replace x &amp; y labels</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>fig4.show() <span class="co"># opens up the plot in your web browser</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script src="https://cdn.plot.ly/plotly-2.4.2.min.js"></script>                <div id="1bea0801-ed32-4a74-860c-f30caec23e4e" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("1bea0801-ed32-4a74-860c-f30caec23e4e")) {                    Plotly.newPlot(                        "1bea0801-ed32-4a74-860c-f30caec23e4e",                        [{"alignmentgroup":"True","hovertemplate":"Importance by tf_idf=%{x}<br>Word=%{y}<extra></extra>","legendgroup":"","marker":{"color":"#636efa","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"h","showlegend":false,"textposition":"auto","type":"bar","x":[1.559527744792995,1.4729110529564429,1.4489929553354546,1.4489929553354546,1.366628247532572,1.2707342233819783,1.1263374626764702,1.0705515748479177,1.0396994062531653,0.9819407019709618,0.9819407019709618,0.7958985026808902,0.7624405340291871,0.7364555264782214,0.7137010498986118,0.6987497878054801,0.6849278173883654,0.6849278173883654,0.6653389708728469,0.6546271346473079,0.6532728597004818,0.6367188021447122,0.611743757055953,0.611686173553911,0.5991289903947077,0.5991289903947077,0.5883393037666953,0.5883393037666953,0.5883393037666953,0.5631687313382351],"xaxis":"x","y":["password","convey","yes","yes","green","finish","carbon","pin","raised","dark","color","ping","fell","menu","choose","short","hi","hi","vacation","lighthouse","today","talk","beacon","panel","basically","unstable","hey","hey","hey","translate"],"yaxis":"y"}],                        {"barmode":"relative","legend":{"tracegroupgap":0},"template":{"data":{"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"#E5ECF6","showlakes":true,"showland":true,"subunitcolor":"white"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2}}},"title":{"text":"Possibly Important Words in Conti Messages"},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Importance by tf_idf"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Word"}}},                        {"responsive": true}                    )                };                            </script>        </div>
+</div>
+</div>
+</section>
+<section id="network" class="level2">
+<h2 class="anchored" data-anchor-id="network">Network</h2>
+<p>A <em>Network</em> is a vizualization/graph that shows the relationships between nodes. - Nodes are points on the graph that can each represent a term. - Edges are lines that represent a connection between the two nodes. They can show which term precedes or come after another term.</p>
+<p>A network would be a good way to visualize the relationship between the hackers. To visualize networks, we will be using functions from the <em>Pyvis</em> library. But to gain some control over the size of the network, we will make it so that it only shows the connection possess by specified groups/tiers of users. To pave the way for that, we will first sort our dataset by those who sent the most messages, to those who sent the least:</p>
+<div class="cell">
+<div class="sourceCode" id="cb52"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>sample_from <span class="op">=</span> count(sample, <span class="st">"from"</span>) <span class="co"># counting the number of rows for each user in the "from" column</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>sample_from_sorted <span class="op">=</span> sample_from.sort_values(by <span class="op">=</span> <span class="st">'n'</span>, ascending <span class="op">=</span> <span class="va">False</span>) <span class="co"># sorting the rows by high to low "n" counts</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Because we want to create multiple networks, but do not want to rewrite the same code multiple times, the code to create the network(s) will be made into a function. This function will require the sample &amp; sample_from_sorted dataframes to be already loaded, the username extensions to have already been removed, and the pyvis library to have already been imported. For its inputs, it will accepts 2 numbers to specify which users in the sample_from_sorted dataframe we want to see in the network, a color for the nodes in the network, and a color for the lines in the network.</p>
+<div class="cell">
+<div class="sourceCode" id="cb53"><pre class="sourceCode python cell-code code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pyvis</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyvis.network <span class="im">import</span> Network</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> conti_network(start_num, end_num, node_color, edge_color): </span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># finding the specified users ranging from start number to end number</span></span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>  specified_users <span class="op">=</span> <span class="bu">list</span>(sample_from_sorted[start_num : end_num][<span class="st">"from"</span>])</span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Counting the number of messages sent from each user to the others:</span></span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>  sample_weight <span class="op">=</span> sample.groupby([<span class="st">"from"</span>, <span class="st">"to"</span>], as_index <span class="op">=</span> <span class="va">False</span>).count()</span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Renaming a column:</span></span>
+<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a>  sample_weight.columns <span class="op">=</span> sample_weight.columns.<span class="bu">str</span>.replace(<span class="st">"ts"</span>, <span class="st">"weight"</span>)</span>
+<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Keeping only those rows where the specified users sent messages: </span></span>
+<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a>  sample_weight <span class="op">=</span> sample_weight[sample_weight[<span class="st">"from"</span>].isin(specified_users)]</span>
+<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb53-16"><a href="#cb53-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Configuring network/graph</span></span>
+<span id="cb53-17"><a href="#cb53-17" aria-hidden="true" tabindex="-1"></a>  conti_net <span class="op">=</span> Network(height <span class="op">=</span> <span class="st">'800px'</span>, width <span class="op">=</span> <span class="st">'100%'</span>, bgcolor <span class="op">=</span> <span class="st">'#222222'</span>, <span class="co"># '#222222' for black</span></span>
+<span id="cb53-18"><a href="#cb53-18" aria-hidden="true" tabindex="-1"></a>  font_color <span class="op">=</span> <span class="st">'white'</span>, notebook <span class="op">=</span> <span class="va">True</span>) </span>
+<span id="cb53-19"><a href="#cb53-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-20"><a href="#cb53-20" aria-hidden="true" tabindex="-1"></a>  conti_net.barnes_hut() <span class="co"># Setting physics layout of the network</span></span>
+<span id="cb53-21"><a href="#cb53-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb53-22"><a href="#cb53-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Creating data for the network's lines using the "from", "to", &amp; "weight" (former "n") columns:</span></span>
+<span id="cb53-23"><a href="#cb53-23" aria-hidden="true" tabindex="-1"></a>  sources <span class="op">=</span> sample_weight[<span class="st">'from'</span>]</span>
+<span id="cb53-24"><a href="#cb53-24" aria-hidden="true" tabindex="-1"></a>  targets <span class="op">=</span> sample_weight[<span class="st">'to'</span>]</span>
+<span id="cb53-25"><a href="#cb53-25" aria-hidden="true" tabindex="-1"></a>  weights <span class="op">=</span> sample_weight[<span class="st">'weight'</span>]</span>
+<span id="cb53-26"><a href="#cb53-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-27"><a href="#cb53-27" aria-hidden="true" tabindex="-1"></a>  edge_data <span class="op">=</span> <span class="bu">zip</span>(sources, targets, weights) <span class="co"># creates an iterable zip object from the 3 columns' data</span></span>
+<span id="cb53-28"><a href="#cb53-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-29"><a href="#cb53-29" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> e <span class="kw">in</span> edge_data:</span>
+<span id="cb53-30"><a href="#cb53-30" aria-hidden="true" tabindex="-1"></a>    src <span class="op">=</span> e[<span class="dv">0</span>] <span class="co"># getting data from the first "column" (formerly "from") of the zip object</span></span>
+<span id="cb53-31"><a href="#cb53-31" aria-hidden="true" tabindex="-1"></a>    dst <span class="op">=</span> e[<span class="dv">1</span>] <span class="co"># getting data from the second "column" (formerly "to")  of the zip object</span></span>
+<span id="cb53-32"><a href="#cb53-32" aria-hidden="true" tabindex="-1"></a>    w <span class="op">=</span> e[<span class="dv">2</span>] <span class="co"># getting data from the third "column" (formerly "weight", or "n") of the zip object</span></span>
+<span id="cb53-33"><a href="#cb53-33" aria-hidden="true" tabindex="-1"></a>    conti_net.add_node(src, src, title <span class="op">=</span> src, color <span class="op">=</span> node_color) <span class="co"># adding a node for the source (from)</span></span>
+<span id="cb53-34"><a href="#cb53-34" aria-hidden="true" tabindex="-1"></a>    conti_net.add_node(dst, dst, title <span class="op">=</span> dst, color <span class="op">=</span> node_color) <span class="co"># adding a node for the destination (to)</span></span>
+<span id="cb53-35"><a href="#cb53-35" aria-hidden="true" tabindex="-1"></a>    conti_net.add_edge(src, dst, value <span class="op">=</span> w <span class="op">*</span> <span class="dv">10</span>, color <span class="op">=</span> edge_color) <span class="co"># adding a line from source to destination</span></span>
+<span id="cb53-36"><a href="#cb53-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-37"><a href="#cb53-37" aria-hidden="true" tabindex="-1"></a>  neighbor_map <span class="op">=</span> conti_net.get_adj_list() <span class="co"># getting a dictionary of id(s) of connected nodes</span></span>
+<span id="cb53-38"><a href="#cb53-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-39"><a href="#cb53-39" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Adding user data to node table:</span></span>
+<span id="cb53-40"><a href="#cb53-40" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> node <span class="kw">in</span> conti_net.nodes:</span>
+<span id="cb53-41"><a href="#cb53-41" aria-hidden="true" tabindex="-1"></a>    node[<span class="st">'value'</span>] <span class="op">=</span> <span class="bu">len</span>(neighbor_map[node[<span class="st">"id"</span>]]) <span class="co"># adding to the node, a count of the number of connected nodes </span></span>
+<span id="cb53-42"><a href="#cb53-42" aria-hidden="true" tabindex="-1"></a>    node[<span class="st">'title'</span>] <span class="op">=</span> node[<span class="st">'title'</span>] <span class="op">+</span> <span class="st">' sent to or received messages from '</span> <span class="op">+</span> <span class="bu">str</span>(node[<span class="st">'value'</span>]) <span class="op">+</span> <span class="st">' of the present users'</span> <span class="co"># changing the text in the title column</span></span>
+<span id="cb53-43"><a href="#cb53-43" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb53-44"><a href="#cb53-44" aria-hidden="true" tabindex="-1"></a>  conti_net.show(<span class="st">'conti_network.html'</span>) <span class="co"># creating the network html file in the current directory</span></span>
+<span id="cb53-45"><a href="#cb53-45" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb53-46"><a href="#cb53-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Running the function: </span></span>
+<span id="cb53-47"><a href="#cb53-47" aria-hidden="true" tabindex="-1"></a>conti_network(<span class="dv">0</span>, <span class="dv">5</span>, <span class="st">'white'</span>, <span class="st">'red'</span>) <span class="co"># Creating a network for the 5 users that sent the highest number of messages, with red nodes and white lines</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Observation: The produced Network can show many more nodes than the number of users specified in the input, because the network will also make nodes, not only for the users who sent messages, but also for the users who messages were sent to. Text will appear when our mouse pointer hovers over any of the nodes, but if the network is too big, it will be necessary to zoom in before our pointer can accurately make contact with the node and have it provide the text.</p>
+<p>Problems:</p>
+<ul>
+<li><p>When taking only a part of the dataset, the data shown by the network would only show numbers based on that part. The numbers may not be the same if a different part of the dataset is used.</p></li>
+<li><p>This code, which was largely based off of the Microsoft 365 Defender Research Team’s, purely counts connections for each node. This makes it harder for us to determine whether the connections are coming from, or going to, a node. That is why the text that appears when we hover over a node says “sent to or received from”.</p></li>
+<li><p>The produced html file can take a while to load. The higher the number of users inputted, the longer it will take. After repeatedly running the function, it may or may not show a loading bar.</p></li>
+<li><p>Running this function a second time would replace the conti_network.html file in the current folder. Renaming the previous conti_network.html file will prevent that.</p></li>
+</ul>
+</section>
+</main>
+<!-- /main column -->
+<script type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    setTimeout(function() {
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+</body></html>
