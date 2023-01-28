@@ -5,6 +5,6 @@ Used the R programming language to perform a comprehensive data analysis of chat
 
 Some of the code was reproduced in Python
 
-The work was done in RStudio, in Quarto documents, or qmd files. 
+The work was done in RStudio, in Quarto documents, or qmd files, which can be used to produce html files with both the code and the text inside them, to be viewed in a web browser. 
 
 A html presentation was made, including the information, theories, and conclusions, found by the 3 members of our research team.
