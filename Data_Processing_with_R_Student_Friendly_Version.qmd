@@ -1,0 +1,741 @@
+---
+title: "Data_Processing_with_R_Student_Friendly_Version"
+format: html
+editor: visual
+---
+
+Libraries that will be imported in this document. These may require installment in Terminal using "install.packages("package_name"):
+
+```{r}
+install.packages("rjson")
+install.packages("readxl")
+install.packages("DT")
+install.packages("tidyr")
+install.packages("dplyr")
+install.packages("stringr")
+install.packages("ggplot2")
+install.packages("forcats")
+install.packages("tidytext")
+install.packages("wordcloud2")
+install.package("SnowballC")
+install.packages("igraph")
+install.packages("ggraph")
+install.packages("reshape2")
+install.packages("topicmodels")
+install.packages("qdapDictionaries")
+install.packages("wordcloud")
+install.packages("visNetwork")
+```
+
+```{r}
+library(rjson) # to read json files
+library(readxl) # to read excel files
+library(DT)
+library(tidyr) # to create tibbles
+library(dplyr) # to perform operations on data in data frames
+library(stringr) # to detect custom strings
+library(ggplot2) # to create visualizations
+library(forcats) # to reorder some data while plotting
+library(tidytext) # to unnest strings in data frames into tokens
+library(SnowballC) # to conduct stemming of words
+library(igraph) # for network visualizations
+library(ggraph) # for network visualizations
+library(reshape2) # for topic modeling
+library(topicmodels) # to perform topic modeling
+library(qdapDictionaries) # to get an english dictionary
+library(wordcloud) # to create wordclouds
+library(visNetwork) # to create interactive networks
+```
+
+## Introduction
+
+In this Quarto document, we will be analyzing a collection of chat log files from the Conti Ransomware group.
+
+This version of the Quarto document is meant to be usable by students. It should be reproducible, simple to browse, and well-explained. Because the original data set was too large and would cause some of the codes to run more slowly, only a smaller sample of the data set will be used here.
+
+## Loading the Data
+
+The first code chunk will set the folder or directory that this quarto document will get the data from. Without later specifying a different folder, only the files in this folder can be read, and any files written will be saved in this folder:
+
+```{r setup}
+    knitr::opts_knit$set(root.dir = normalizePath("C:\\Users\\jliu2\\Documents\\conti_all_fixed"))
+```
+
+Please replace the directory inside quotation marks with the directory of the folder where your chat log files are, replacing single backslashes with double backslashes. We can used the *getwd()* function to check what folder we are in. If the code above does not work, then we can go to the *Tools* tab, *Global Options*, and change the default working directory.
+
+The original data set had 393 json files. Using the *sample()* function, we will only extract data from 39 of them.
+
+We want to make a combined data frame from those 39 json files. Thus, we will make a loop to go through each file, obtain their data in the form of data frames, and combine them by rows using the *rbind()* function.
+
+We can get these data frames by turning the json files into tibbles, and then unnesting them.
+
+A tibble is a type of data frame within R. When used on our json files, the tibble function produces a column of nested named lists within its cells. The data within these lists aren't put out in the open to be seen. By unnesting the tibble wider, the data inside each named list will be spread into columns and can be seen.
+
+```{r}
+library(rjson) # importing this library for the fromJSON() function
+library(tidyr) # importing this library for the tibble() function
+library(DT)
+
+for (item in sample(list.files(), 39, replace=FALSE)){ # looping through a randomly-chosen 39 files in the present folder
+  json_file <- fromJSON(file = item) # loading the json file
+  tibble <- tibble(comms = json_file) # turning the json file into a tibble
+  if (exists("conti")){ # boolean for if the data frame already exists
+    new_conti <- tibble %>% unnest_wider(comms) 
+    conti <- rbind(conti, new_conti) # combining old & new data frames by row
+    } else { # if the data frame does not exist
+      conti <- tibble %>% unnest_wider(comms) 
+    }
+}
+
+head(conti)
+```
+
+Note: an error may pop up if there are any non-json files in the folder where the conti files are located (for example, a RHistory file)
+
+If the data is already all collected in an document, then we can more directly load that document. The data for this project has been collected in a xlsx document, which can be opened using the *read_excel()* function from the *readxl* package.
+
+```{r}
+library(readxl) # importing for the read_excel() function
+library(dplyr) # importing for the sample_n() function
+
+conti <- read_excel("C:\\Users\\jliu2\\Documents\\R_Scripts\\json_files_combined.xlsx") # reading the file from the folder directory in the string
+
+#conti <- sample_n(conti, nrow(conti)/10)
+
+head(conti)
+```
+
+## Unnecessary Segments
+
+For our text analysis, most of the time, there are certain parts of the text in the data frame that are not necessary, including the hour, minute, and second, in the timestamps, and the extensions of the emails. They can be removed using the *sub()* function and regular expressions:
+
+```{r}
+library(DT)
+
+# Creating a copy of the data frame in case I need to use the original later:
+conti1 <- conti
+
+# keeping only the date for the messages and not the time:
+conti1$ts <- sub("T[0-9]*:[0-9]*:[0-9]*.[0-9]*", "", conti1$ts) 
+# keeping only the name for each email:
+conti1$to <- sub("[\\@|\\.]+[A-Za-z0-9.]*", "", conti1$to) 
+conti1$from <- sub("[\\@|\\.]+[A-Za-z0-9.]*", "", conti1$from) 
+
+conti1
+```
+
+## Encrypted Text
+
+There is likely text in the data set that was encrypted. We would not want this text to affect the results of some of our later text analyses, but neither do we want to ignore their existence. Therefore, we will replace those encrypted messages with null values *(NA)* that exist but have nothing inside.
+
+From the entire data set, there are 2 strings among the messages that represent encrypted text:
+
+-   *"The message is encrypted and cannot be decrypted"*
+
+-   *"This message is encrypted, and you are unable to decrypt it"*
+
+The common part between them is *"message is encrypted"*, so this is the string that will be used to detect which messages in the data set are encrypted when dealing with the encrypted messages.
+
+```{r}
+library(stringr) # importing this library for the str_detect() function
+
+conti_not_encrypted <- conti1[!str_detect(conti1$body,"message is encrypted"), ] # Removing the rows with text that cannot be unencrypted
+
+conti_encrypted <- conti1[str_detect(conti1$body,"message is encrypted"), ] # Getting the rows that are encrypted
+
+conti_encrypted$body = NA # replacing all encrypted values with nulls
+
+conti2 = rbind(conti_not_encrypted, conti_encrypted) # recombining the non-encrypted and encrypted rows
+
+conti2 <- conti2[order(conti2$ts),] # returning order to the data frame by ordering by timestamp
+```
+
+## Addresses
+
+In this data set, there are some types of addresses that may give some interesting or valuable information about the participants in the hacker group:
+
+-   YouTube video addresses
+
+-   non-onion extension email addresses
+
+-   BitCoin wallet addresses
+
+The YouTube addresses in the data set may be of interest because they can tell us what the members of the hacker group are interested in.
+
+```{r}
+youtube_addresses <- conti_not_encrypted[grepl("youtu[.]*be[A-Za-z0-9=/-?&.]+", conti_not_encrypted$body), ] # making a dataframe of rows where the text contains youtube.com
+
+youtube_addresses <- youtube_addresses %>% 
+  distinct(body, .keep_all = TRUE)
+datatable(youtube_addresses[c('ts','body')])
+#nrow(unique(youtube_addresses[c('body')]))
+```
+
+Note: Because there is a relatively small number of youtube addresses in the entire data set, it is possible that no youtube addresses will be obtain from the random sample of rows. In that case, we can re-run the codes above for a new and different sample.
+
+We are interested in users of non-onion extension email addresses because they could possibly be easier to track down than users of onion extension email addresses.
+
+```{r}
+conti_non_onion <- conti
+
+conti_non_onion$from <- sub("\\@[A-Za-z0-9.]*\\.onion|(\\.onion)", "", conti_non_onion$from) # removing the extensions for any addresses that end in onion
+conti_non_onion <- conti_non_onion[str_detect(conti_non_onion$from, "[@|.]"), ] # the only remaining addresses will be those that do not have onion extension, so they can be found by detecting only the @ or . symbol.
+
+conti_non_onion
+
+#conti_non_onion_unique <- data.frame(emails = unique(conti_non_onion$from))
+#write.csv(conti_non_onion_unique, "conti_nonion.csv")
+```
+
+Note: There are also not many of these non-onion email addresses in the entire data set, so it is possible that no addresses will be obtain from the random sample of rows.
+
+We are interested in BitCoin Wallet addresses because it may be possible to use them to find their owners; That would require a database that matches the Bitcoin Wallet addresses to their owners, which unfortunately, is not publically available.
+
+The regular expression used in the following code chunk to extract Bitcoin Wallet addresses is from this webpage: *https://blog.finxter.com/a-regex-to-match-bitcoin-addresses/#:\~:text=A%20regular%20expression%20for%20validating,doesn't%20contain%20ambiguous%20characters*
+
+```{r}
+library(dplyr) # importing this library for the summarize() function
+
+bitcoin_addresses <- conti_not_encrypted[str_detect(conti_not_encrypted$body, "([13]|bc1)[A-HJ-Za-km-z1-9]{27,62}"), ] # finding rows where the text fits in the bitcoin address regular expression.
+
+bitcoin_addresses <- bitcoin_addresses[!(is.na(bitcoin_addresses$body)), ] # removing rows with null values under the "body" column
+
+bitcoin_addresses_only <- bitcoin_addresses %>% 
+  summarize(ts = ts, from = from, to=to, body = str_extract(bitcoin_addresses$body, "([13]|bc1)[A-HJ-Za-km-z1-9]{27,62}")) # using the summarize() function from dplyr to perform operations on the table
+
+# Getting only the unique bitcoin addresses from all the addresses:
+bitcoin_addresses_unique <- data.frame(unique(bitcoin_addresses_only$body))
+
+head(bitcoin_addresses_unique)
+```
+
+## Specific Text
+
+Among the messages in the data set, there may be messages related to subjects that we are interested in, drowned in many more messages about other subjects that may or may not be meaningful, making them hard to see. Using *regular expressions*, we will try to filter for those messages, and see if we can find any useful information within them.
+
+Other than Bitcoin, there are many other *Cryptocurrencies*. We will now search for rows with text that mention some popular Cryptocurrencies:
+
+```{r}
+crypto_mentions <- conti_not_encrypted[str_detect(conti_not_encrypted$body, "(NFT|[Bb]itcoin|[Ee]ther[ie]um|[Pp]olkadot|[Bb]inance|[Tt]ether|USDT|usdt|[Cc]ardano|[Cc]hainlink|[Rr]ipple|[Mm]onero|[Ll]itecoin|USD|usd|IOTA|iota|[Dd]ogecoin|[Cc]rypto|[Cc]oin)"), ] %>% 
+  distinct(body, .keep_all = TRUE)
+
+crypto_mentions
+```
+
+Hackers can target, not only their own country, but also countries outside their own. We can see if we can find any information about in their messages about their plans or activities related to various countries:
+
+```{r}
+library(ggplot2)
+
+# Making a regular expression that contains all or most country names
+regex_expression <- "([Aa]fghanistan|[Aa]lbania|[Aa]lgeria|[Aa]ndorra|[Aa]ngola|[Aa]ntigua|[Bb]arbuda|[Aa]rgentina|[Aa]rmenia|[Aa]ustralia|[Aa]ustria|[Aa]zerbaijan|[Bb]ahamas|[Bb]ahrain|[Bb]angladesh|[Bb]arbados|[Bb]elarus|[Bb]elgium|[Bb]elize|[Bb]enin|[Bb]hutan|[Bb]olivia|[Bb]osnia|[Hh]erzegovina|[Bb]otswana|[Bb]razil|[Bb]runei|[Bb]ulgaria|[Bb]urkina|[Bb]urundi|[Cc]abo\\s[Vv]erde|[Cc]ambodia|[Cc]ameroon|[Cc]anada|[Aa]frican\\s[Rr]epublic|[Cc]had|[Cc]hile|[Cc]hina|[Cc]olombia|[Cc]omoros|[Cc]ongo|[Cc]osta\\s[Rr]ica|[Cc][ôo]te\\sd’Ivoire|[Cc]roatia|[Cc]uba|[Cc]yprus|[Cc]zech|[Dd]enmark|[Dd]jibouti|[Dd]ominica|[Dd]ominican|[Rr]epublic|[Tt]imor|[Ee]cuador|[Ee]gypt|[Ss]alvador|[Ee]quatorial|[Ee]ritrea|[Ee]stonia|[Ee]swatini|[Ee]thiopia|[Ff]iji|[Ff]inland|[Ff]rance|[Gg]abon|[Gg]ambia|[Gg]eorgia|[Gg]ermany|[Gg]hana|[Gg]reece|[Gg]renada|[Gg]uatemala|[Gg]uinea|[Gg]uyana|[Hh]aiti|[Hh]onduras|[Hh]ungary|[Ii]celand|[Ii]ndia|[Ii]ndonesia|[Ii]ran|[Ii]raq|[Ii]reland|[Ii]srael|[Ii]taly|[Jj]amaica|[Jj]apan|[Jj]ordan|[Kk]azakhstan|[Kk]enya|[Kk]iribati|[Kk]orea|[Kk]orea|[Kk]osovo|[Kk]uwait|[Kk]yrgyzstan|[Ll]aos|[Ll]atvia|[Ll]ebanon|[Ll]esotho|[Ll]iberia|[Ll]ibya|[Ll]iechtenstein|[Ll]ithuania|[Ll]uxembourg|[Mm]adagascar|[Mm]alawi|[Mm]alaysia|[Mm]aldives|[Mm]ali|[Mm]alta|[Mm]arshall|[Mm]auritania|[Mm]auritius|[Mm]exico|[Mm]icronesia|[Mm]oldova|[Mm]onaco|[Mm]ongolia|[Mm]ontenegro|[Mm]orocco|[Mm]ozambique|[Mm]yanmar|[Bb]urma|[Nn]amibia|[Nn]auru|[Nn]epal|[Nn]etherlands|[Zz]ealand|[Nn]icaragua|[Nn]iger|[Nn]igeria|[Mm]acedonia|[Nn]orway|[Oo]man|[Pp]akistan|[Pp]alau|[Pp]anama|[Pp]apua|[Pp]araguay|[Pp]eru|[Pp]hilippines|[Pp]oland|[Pp]ortugal|[Qq]atar|[Rr]omania|[Rr]ussia|[Rr]wanda|[Ss]aint\\sKitts|[Nn]evis|[Ss]aint\\s[Ll]ucia|[Ss]aint\\s[Vv]incent|[Gg]renadines|[Ss]amoa|[Ss]an\\s[Mm]arino|[Ss]ao\\s[Tt]ome|[Pp]rincipe|[Ss]audi|[Aa]rabia|[Ss]enegal|[Ss]erbia|[Ss]eychelles|[Ss]ierra[Ll]eone|[Ss]ingapore|[Ss]lovakia|[Ss]lovenia|[Ss]olomon|[Ii]sland|[Ss]omalia|[Aa]frica|[Ss]pain|[Ss]ri|[Ll]anka|[Ss]udan|[Ss]udan|[Ss]uriname|[Ss]weden|[Ss]witzerland|[Ss]yria|[Tt]aiwan|[Tt]ajikistan|[Tt]anzania|[Tt]hailand|[Tt]ogo|[Tt]onga|[Tt]rinidad|[Tt]obago|[Tt]unisia|[Tt]urkey|[Tt]urkmenistan|[Tt]uvalu|[Uu]ganda|[Uu]kraine|[Aa]rab|[Ee]mirates|[Kk]ingdom|UK|US|[Uu]ruguay|[Uu]zbekistan|[Vv]anuatu|[Vv]atican|[Vv]enezuela|[Vv]ietnam|[Yy]emen|[Zz]ambia|[Zz]imbabwe)"
+
+# Finding rows with text that mention the country names:
+country_mentions <- conti_not_encrypted[str_detect(conti_not_encrypted$body, regex_expression), ] %>% distinct(body, .keep_all = TRUE)
+
+# Keeping only the country name in the data frame's text
+countries_only <- country_mentions %>% 
+  summarize(ts = ts, from = from, to=to, body = str_extract(country_mentions$body, regex_expression))
+
+countries_only %>%
+  count(body, sort = TRUE) %>% # Counting the number of rows each country is mentioned in
+  mutate(word = reorder(body, n)) %>%
+  ggplot(aes(word, n)) +
+  geom_col() +
+  xlab(NULL) +
+  coord_flip() + 
+  ggtitle("Countries that the Hackers mention most")
+```
+
+## Frequency Analysis
+
+By "Frequency Analysis", we are referring to the how often terms appear in documents, or "*Term Frequency*". But how often a word appears, does not always show how important it is.
+
+It is said that "*tf_idf*", the *product* of *term frequency* and *inverse document frequency*, which decreases for words that are more commonly in the documents and increases for words that are more rarely used, can be used to rank the importance of the terms.
+
+To begin calculating tf_idf, we need a data frame with columns that contain: words, the number of each word, and something that groups the words (Ex. Documents that groups of words are from)
+
+Duplicate text among the rows may cause wrong results in frequency analysis. For example, when one casual message is sent to everyone in a group chat, the counts of the words in that message would skyrocket. We will remove the duplicates, but considering that text might just be coincidentally repeated over time, we will only remove rows with duplicate text from the same day:
+
+```{r}
+conti_unique <- conti_not_encrypted %>% 
+  distinct(ts, body, .keep_all = TRUE) # the .keep_all = TRUE argument lets us keep the first row of the duplicates that are removed
+```
+
+```{r}
+library(tidytext) # importing this library for the unnest_tokens() function
+
+#conti_terms <- conti_not_encrypted %>%
+conti_terms <- conti_unique %>%
+  unnest_tokens(word, body) %>% # unnesting sentences into words
+  count(ts, word, sort=TRUE) # counting each word for each date & sorting them in descending order
+
+conti_terms
+```
+
+There are words that have the same base but different ending. For example: wait & waiting. These words have the same meaning, but will be counted separately. This is unless we "stem" them, cutting off the extra part, and only leaving them with their base:
+
+```{r}
+library(SnowballC) # importing for wordStem() function
+
+conti_terms$word <- SnowballC::wordStem(conti_terms[[2]], language = 'eng')
+
+conti_terms
+```
+
+There are some incomprehensible terms like strings of what seem like random numbers or letters. To get rid of these terms, we will use the *inner_join()* function and a english dictionary from the *qdapDictionaries* library:
+
+```{r}
+library(qdapDictionaries)
+
+english_words <- data.frame(GradyAugmented) # GradyAugmented is a list of over 120,000 english words from qdapDictionaries
+english_words <- rename(english_words, word = GradyAugmented) # renaming the default column name into "word"
+```
+
+But first, we need to replace the slang words in the data with understandable english words, and add those words to our english words:
+
+```{r}
+# creating a data frame of slang words and their translations:
+slang_words = data.frame(slang = c("Hell","YES","wheelbarrow","wheelbarrows","cars","cue balls","cue ball","credits","vmik","grid","facial expressions","fireworks","whining","school","balls","zithers","food","silkcode","kosh","toad", "booze","the trick or trick","BC","backpack"), word = c("AD","DA","host","hosts","hosts","bitcoin","bitcoin","credentials","WMIC","network","mimikatz","firewall","SQL","SQL","shares","Citrix","FUD","shellcode","cash","jabber","Emotet","Trickbot","BazarBackdoor","Ryuk"))
+
+# Iterating over the slang dataframe to replace slang words in the unnested dataframe:
+for (r in 1:nrow(slang_words)){
+  conti_terms$word = str_replace_all(conti_terms$word, slang_words[r, ][[1]], slang_words[r, ][[2]])
+}
+```
+
+```{r}
+# creating a data frame of custom words:
+additional_words = data.frame(word = c("AD", "DA", "host", "hosts", "bitcoin", "crypto", "cryptocurrency", "credentials", "WMIC", "network", "mimikatz", "firewall", "SQL", "shares", "Citrix", "FUD", "shellcode", "cash", "jabber", "Emotet", "Trickbot", "BazarBackdoor", "Ryuk", "decrypted", "decrypt", "message", "bro", "error", "encrypted", "encrypt", "trends", "admin"))
+
+# adding those custom words to the english words dataframe by row:
+english_words = rbind(english_words, additional_words)
+```
+
+Now, we can use the *inner_join()* function to remove any words in our data not within our english words:
+
+```{r}
+conti_terms2 <- inner_join(conti_terms, english_words, by = "word")
+
+conti_terms2
+```
+
+We can use a Wordcloud to visualize which words appear most in the dataset, excluding words from encrypted messages and stop words, frequently used words like: "a", "to", "are", that have relatively less meaning:
+
+```{r}
+data("stop_words") # downloading stopwords
+
+#library(wordcloud)
+library(wordcloud2)
+
+conti_terms2 %>%
+  group_by(word) %>%
+  summarize(n = sum(n)) %>% # summing up the n counts for the same words
+  anti_join(stop_words) %>% # removing stop words
+  wordcloud2(shape='star')
+  #with(wordcloud(word, n, max.words = 100)) # making a wordcloud for the top at most 100 words
+```
+
+Now, we will calculate *tf_idf* using the *bind_tf_idf()* function:
+
+```{r}
+conti_tf_idf <- conti_terms2 %>%
+  bind_tf_idf(word, ts, n) # calculating tf_idf using required columns
+
+conti_tf_idf
+```
+
+```{r}
+library(forcats) # loading this library for the fct_reorder() function
+
+conti_tf_idf %>%
+  slice_max(tf_idf, n = 25) %>% # to see n number of words on the plot
+  ungroup() %>%
+  ggplot(aes(tf_idf, fct_reorder(word, tf_idf))) +
+  geom_col(show.legend = FALSE) +
+  labs(x = "tf-idf", y = NULL) + 
+  ggtitle("Most Important Terms in our Documents")
+```
+
+Observations: Most of these words do not look very important. Perhaps it is the fault of the random sample, or that the tf_idf values weren't calculated with suitable inputs.
+
+## Creating WordClouds for specific hacker
+
+Creating a WordCloud from all the words within the data set showed us what topics uncertain members of the group have been typing about for that year. Creating a WordCloud for a specific user can show us what that certain member is about.
+
+```{r}
+conti_terms3 <- conti_not_encrypted %>%
+  unnest_tokens(word, body) %>% # unnesting sentences into words
+  count(from, word, sort=TRUE) # counting each word for each date & sorting them in descending order
+
+# Iterating over the slang dataframe to replace slang words in the unnested dataframe:
+for (r in 1:nrow(slang_words)){
+  conti_terms3$word = str_replace_all(conti_terms3$word, slang_words[r, ][[1]], slang_words[r, ][[2]])
+}
+
+# keeping only understandable english words in our table:
+conti_terms3 <- inner_join(conti_terms3, english_words, by = "word")
+```
+
+Creating a function that accepted the name of a Conti hacker and produces a WordCloud from his words:
+
+```{r}
+about_hacker <- function(hacker, shape){
+  conti_terms3[conti_terms3$from == hacker, ] %>% # selecting rows from the data frame where the entry from a certain column equals the variable
+    group_by(word) %>% # grouping rows for next function
+    summarize(n = sum(n)) %>% # summing up the n counts for the same words
+    anti_join(stop_words) %>% # removing stop words
+    wordcloud2(shape = shape) # creating the wordcloud in a specific shape
+}
+
+#about_hacker("defender", "star")
+about_hacker("stern", "star")
+```
+
+## Bigrams
+
+Single word tokens (unigrams) sometimes does not give us enough information. In that case, we can use more words, like with two word tokens (bigrams):
+
+```{r}
+conti_bigrams <- conti_unique %>%
+  unnest_tokens(bigram, body, token = "ngrams", n = 2) %>% # unnesting sentences into bigrams
+  count(ts, bigram, sort=TRUE) # counting each word & making a "n" column w/ counts in descending order
+
+conti_bigrams
+```
+
+We will remove the rows with *NA* (null) values, which are not needed in the data frame:
+
+```{r}
+library(tidyr) # importing for the drop_na() function
+
+conti_bigrams <- conti_bigrams %>% drop_na(bigram) # dropping rows where bigram column has NA value
+```
+
+There are readable and unreadable words in the two columns. These will need to be cleaned. For that, the bigrams will be split into two columns, and each will be checked. Stopwords will also be removed from both columns.
+
+```{r}
+conti_bigrams_separated <- conti_bigrams %>%
+  separate(bigram, c("word1", "word2"), sep = " ") # separating 2 words strings into 2 columns with 1 word each
+
+conti_bigrams_separated
+```
+
+```{r}
+conti_bigrams_separated2 <- conti_bigrams_separated %>%
+  filter(word1 %in% english_words$word) %>% # removing rows where words in column word1 are not in english_words
+  filter(word2 %in% english_words$word) # removing rows where words in column word2 are not in english_words
+```
+
+```{r}
+conti_bigrams_separated2 <- conti_bigrams_separated2 %>%
+  filter((!word1 %in% stop_words$word)) %>% # to remove rows where word1 column has stopwords 
+  filter((!word2 %in% stop_words$word)) # to remove rows where word2 column has stopwords
+```
+
+Now, we'll unite the words in both columns back to the original bigrams using the *unite()* function:
+
+```{r}
+conti_bigrams2 <- conti_bigrams_separated2 %>%
+  unite(bigram, word1, word2, sep = " ") # uniting the words in both columns back to the original bigrams
+
+conti_bigrams2
+```
+
+```{r}
+conti_bigrams2 %>%
+  slice_max(n, n = 25) %>% # to see n number of words on the plot
+  ungroup() %>%
+  ggplot(aes(n, fct_reorder(bigram, n))) + # creating the ggplot figure with bigrams sorted by n counts
+  geom_col(show.legend = FALSE, fill = "black") +
+  labs(x = "count", y = NULL) + # setting x label & removing y label
+  ggtitle("Most Frequent Bigrams in our Documents") # setting a title
+```
+
+```{r}
+conti_bigrams_tf_idf <- conti_bigrams2 %>%
+  count(ts, bigram) %>% # counting # times each bigram appears for each date
+  bind_tf_idf(bigram, ts, n) %>% # calculating & making columns for tf, idf, tf_idf
+  arrange(desc(tf_idf)) # sorting rows by descending tf_idf
+
+conti_bigrams_tf_idf
+```
+
+```{r}
+conti_bigrams_tf_idf %>%
+  slice_max(tf_idf, n = 25) %>% # to see n number of words on the plot
+  ungroup() %>%
+  ggplot(aes(tf_idf, fct_reorder(bigram, tf_idf))) +
+  geom_col(show.legend = FALSE, fill = "black") +
+  labs(x = "tf-idf", y = NULL) + # setting x label & removing y label
+  ggtitle("Most Important Bigrams in our Documents") # setting a title
+```
+
+## Networks
+
+Another way to look at these bigrams is by making them into a *Network*, a vizualization/graph that shows the relationships between terms.
+
+A Network can have:
+
+-   Nodes: Points on the graph that represent each term
+
+-   Links: lines that represent a connection between the two terms, or arrows that show which term precedes or follows the other
+
+And it requires 3 variables for its construction:
+
+-   from: which will be used to set the node where an arrow line will come from
+
+-   to: which will be used to set the node where the arrow line will go to
+
+-   weight: the number associated with each relationship. It can be used to show which from-to relationship is greater or less than others
+
+Creating a dataframe with the 3 required variables:
+
+```{r}
+conti_bigrams_separated3 <- conti_bigrams_separated2 %>%
+  group_by(word1, word2) %>%
+  summarize(n = sum(n)) # summing counts for unique word1 word2 combinations
+
+conti_bigrams_separated3
+```
+
+Now, we will make a network of words:
+
+```{r}
+library(igraph) # importing this package for the graph_from_data_frame() function
+library(ggraph) # importing this package for the ggraph() function
+
+bigram_graph <- conti_bigrams_separated3 %>%
+  filter(n >= 30) %>% # filtering for bigrams that appeared more than 30 times
+  graph_from_data_frame() # requires data frames with columns similar to "from", "to", & "n"
+
+a <- grid::arrow(type = "closed", length = unit(.15, "inches")) # setting arguments for arrows in the network
+
+ggraph(bigram_graph, layout = "fr") + # creating a layout for the network
+  geom_edge_link(aes(edge_alpha = n), show.legend = FALSE, # adding lines to the graph & making the shade of the line dependent on the number in column "n", showing which lines/relationships have greater or lesser counts
+                 arrow = a, end_cap = circle(.07, 'inches')) + # arrow is an argument for the lines
+  geom_node_point(color = "lightblue", size = 5) + # setting the color & size of the points
+  geom_node_text(aes(label = name), vjust = 1, hjust = 1) + # adding text to the graph
+  theme_void() # adding a theme to make background white
+```
+
+## Interactive Network
+
+It is also possible for network visualizations to become *interactive*, allowing real-time manipulation of the visualization. An interactive network would be more useful when trying to find "person-to-person" relationships between the members of the hacker group.
+
+We will be creating an *interactive network* to show which hackers sent the most messages in the group, and to who. The package we will be using is *visNetwork*, which requires 2 data frames made in very specific ways.
+
+One of which is a data frame called "edges", with columns "from" & "to", to tell it which nodes to connect:
+
+```{r}
+edges <- conti2 %>%
+  count(from, to, sort = TRUE) # counting the number of times each user sent a message to each of their receivers
+
+edges$arrows = "to" # to indicate the direction of the arrows in the network
+edges$title = paste0(edges$from, " sent ", edges$n, " messages to ", edges$to) # sets what texts pops up when we hover over the lines
+edges$smooth = FALSE # disabling the setting that makes the lines curve for better performance
+edges$shadow = FALSE # preventing the lines from appearing with shadows
+edges$color.background = "gray" # setting the colors of the lines
+edges$color.highlight = "red" # setting the color of the lines when clicked
+
+head(edges)
+```
+
+The other data frame that *visNetwork* requires is called "nodes":
+
+```{r}
+# to get unique nodes and count the number of times each user sent a message:
+from_count <- conti2 %>% 
+  count(from, sort = TRUE) 
+
+# creating a combination for coloring the nodes:
+color_combo <- c(rep("yellow", 1),rep("lightblue", 5), rep("lightgreen", 25), rep("pink", nrow(from_count)-31)) # using yellow for top 1 users, blue for the next 5, green for the following 25, and pink for the rest
+
+nodes <- data.frame(id = from_count$from,
+                    value = from_count$n, # to make the sizes of the nodes based on the number of messages the users sent
+                    title = paste0(from_count$from, " sent ", from_count$n, " messages total"), # sets what texts pops up when we hover over the nodes
+                    color.background = color_combo, 
+                    color.border = color_combo,
+                    color.highlight = color_combo,
+                    shadow = TRUE # allowing the lines to appear with shadows
+                    )
+
+head(nodes)
+```
+
+```{r}
+library(visNetwork) # importing this library to get the visNetwork() function
+
+visNetwork(nodes %>% head(n = 100), edges, main = "A network of messages sent from Conti Hackers", submain = "of the top 100 most active hackers", height = "700px", width = "100%", footer = "Warning: It may be difficult to pinpoint one node out of many edges. Dragging them out first makes it easier.") %>% 
+  visPhysics(stabilization = TRUE, # setting this to false makes the graph appear faster. setting this to true keeps the network in the shape of a globe
+            solver = "forceAtlas2Based", 
+            forceAtlas2Based = list(springConstant = 0)) %>% # setting springConstant = 0 stops the nodes from springing back to original position when pulled further
+  visInteraction(navigationButtons = TRUE, dragNodes = TRUE, dragView = FALSE, zoomView = TRUE, keyboard = TRUE, tooltipDelay = 0, hover = TRUE) %>%
+  visLayout(randomSeed = 10) # to keep the visualization's structure the same after each reload
+```
+
+To create a network of who received messages from which hackers, some settings, or in other words, some columns in the 2 data frames will need to be changed:
+
+```{r}
+edges$arrows = "from" # changes arrows column values to "from" to represent that the messages are being received
+edges$title = paste0(edges$to, " received ", edges$n, " messages from ", edges$from) # changing what texts pops up when we hover over the lines
+
+head(edges)
+```
+
+```{r}
+# to get unique nodes and count the number of times each receiver got a message:
+to_count <- conti2 %>% 
+  count(to, sort = TRUE) 
+
+# creating a combination for coloring the nodes:
+color_combo <- c(rep("yellow", 1),rep("lightblue", 5), rep("lightgreen", 25), rep("pink", nrow(to_count)-31)) # using yellow for top 1 users, blue for the next 5, green for the following 25, and pink for the rest
+
+nodes <- data.frame(id = to_count$to,
+                    value = to_count$n, # to base the sizes of the nodes on counts of messages received
+                    title = paste0(to_count$to, " received ", to_count$n, " messages total"), # sets what texts pops up when we hover over the nodes
+                    color.background = color_combo,
+                    color.border = color_combo,
+                    color.highlight = color_combo,
+                    shadow = TRUE # allowing the lines to appear with shadows
+                    )
+
+head(nodes)
+```
+
+```{r}
+visNetwork(nodes %>% head(n = 100), edges, main = "A network of messages received by Conti Hackers", submain = "of the top 100 most popular receivers", height = "700px", width = "100%", footer = "Warning: It may be difficult to pinpoint one node out of many edges. Dragging them out first makes it easier.") %>%
+  visPhysics(stabilization = TRUE, # setting this to false makes the graph appear faster. setting this to true keeps the network in the shape of a globe
+            solver = "forceAtlas2Based", 
+            forceAtlas2Based = list(springConstant = 0)) %>% # setting springConstant = 0 stops the nodes from springing back to original position when pulled further
+  visInteraction(navigationButtons = TRUE, dragNodes = TRUE, dragView = FALSE, zoomView = TRUE, keyboard = TRUE, tooltipDelay = 0, hover = TRUE) %>%
+  visLayout(randomSeed = 20) # to keep the visualization's structure the same after each reload
+```
+
+## Websites
+
+Of the unreadable terms, there are websites that may be significant. Here, we will create a table to count the mention of each website:
+
+```{r}
+unreadable_terms <- conti_terms %>%
+  filter(!word %in% english_words$word) # finding unreadable words by filtering for those not in readable words
+  
+websites <- unreadable_terms[str_detect(unreadable_terms$word, "\\.(com|gov|net|org|co|uk|us|edu|info|xyz|ly|site)"), ] %>% # filtering for website strings ending in these more common extensions
+  mutate(word = str_remove_all(word, "www.")) %>% # removing www. to make websites that are the same, but may or may not have www., match
+  group_by(word) %>%
+  summarize(n = sum(n))
+
+websites
+```
+
+With this data frame, we can plot the sites most frequently visited by Conti hackers:
+
+```{r}
+websites %>%
+  filter(n >= 3) %>% # filtering for sites that have been mentioned 3 or more times
+  ggplot(aes(n, fct_reorder(word, n))) + # reordering the rows by n count
+  geom_col(show.legend = FALSE) + # adding bars to the plot & removing legend
+  labs(x = "Frequency", y = NULL) + # setting x label, removing y label 
+  ggtitle("Hackers' most frequently visited websites") + 
+  geom_bar(stat="identity", fill="red") # adding color to the bars
+```
+
+## Topic Modeling
+
+Topic modeling is a form of unsupervised classification, similar to clustering. It finds probabilities that terms can be related to the same topic.
+
+The *LDA()* (Latent Dirichlet Allocation) function, from the *topicmodel* package, can be used to make a topic model. We will see if this model can successfully separate the words in the hackers' messages into obvious topics. But to use this function, we must input into a *document-term matrix*.
+
+```{r}
+# making a document-term matrix by providing it the "document", term, and count variables necessary
+conti_dtm <- conti2 %>%
+  unnest_tokens(word, body) %>% # unnesting sentences into words
+  count(ts, word, sort=TRUE) %>% # counting each word for each user
+  cast_dtm(ts, word, n) # inputting the 
+
+conti_dtm
+```
+
+Making the LDA model using the *LDA()* function:
+
+```{r}
+library(topicmodels) # importing this library for the LDA() function
+
+conti_lda <- LDA(conti_dtm, k = 4, control = list(seed = 1234)) # Creating a LDA (Latent Dirichlet Allocation) model with supposedly 4 topics
+
+conti_lda
+```
+
+Observation: The larger the number of topics we are making the model for, the more time running the function takes.
+
+Tidying the model result using the *tidy()* function:
+
+```{r}
+conti_topics <- tidy(conti_lda, matrix = "beta")  # using argument matrix = "beta" produces a column w/ the probability that a term is for a particular topic
+
+conti_topics
+```
+
+There are too many terms in the data frame, and many of them are momentarily indecipherable. We will remove those by filtering them with the help of our english words, websites, and stopwords:
+
+```{r}
+conti_topics2 <- conti_topics %>%
+  filter((term %in% english_words$word)|(term %in% websites$word)) %>% # filtering to keep only english words or websites from previous data frames that we made
+  filter(!term %in% stop_words$word) %>% # removing stop words from data frame
+  group_by(topic) %>% # grouping the terms by their documents
+  slice_max(beta, n = 20) %>% # getting only the 20 w/ the top beta values for each topic
+  ungroup() %>%
+  arrange(topic, -beta) # sorting the tibble by descending beta for each topic
+
+conti_topics2
+```
+
+```{r}
+conti_topics2 %>%
+  mutate(term = reorder_within(term, beta, topic)) %>% # reordering the rows by descending beta value for each topic
+  ggplot(aes(beta, term, fill = factor(topic))) + # making a plot, w/ y axis = term & x axis = beta value
+  geom_col(show.legend = FALSE) + # adds bars to plot, but prevents legend from being shown
+  facet_wrap(~ topic, scales = "free") + # splits one plot into multiple plots
+  scale_y_reordered() + # turns the y ticks, the terms which were changed mutate() function, back to normal terms without the topic appended to them
+  ggtitle("Terms most likely to exist among 4 Topics")
+```
+
+Observation: There does not seem to be any obvious topic from the 4 plots. Perhaps there will be if the number of topics that the model is tuned to is changed, or if the choice of what takes the place of the "document" in the document-term matrix is changed.
+
+## Time Series
+
+By making a line plot of the number of messages on each day, we may be able see when the hacker group was most actively committing crimes. By matching these times to news about cybercrime, we may be able to find possible and unexpected connections between the Conti group and certain incidents.
+
+```{r}
+# Counting number of messages each day (timestamp)
+conti_activity <- conti1 %>%
+  count(ts)
+
+ggplot(data=conti_activity, aes(x=ts, y=n, group=1)) + # creating a plot w/ x axis = timestamp & y axis = number of messages
+  geom_line(color="black") + # adding lines to the plot & setting a color
+  labs(x = "Date", y = "Num Messages") + # renaming the x & y axes
+  ggtitle("Count of messages by Hacker group in 2021") + 
+  theme(axis.text.x = element_text(angle = 45)) + # rotating the x ticks to make them overlap less
+  scale_x_discrete(breaks = conti_activity$ts[seq(1, length(conti_activity$ts), by = 3)]) # showing only every 3rd x tick (date) to make the x axis clearer
+```
+
+```{r}
+# Counting number of non-encrypted messages each day (timestamp)
+conti_activity_not_encrypted <- conti_not_encrypted %>%
+  count(ts)
+
+# Counting number of encrypted messages each day (timestamp)
+conti_activity_encrypted <- conti_encrypted %>%
+  count(ts)
+
+# Merging the previous 2 data frames based on timestamp:
+conti_activity_comparison <- left_join(conti_activity_encrypted, conti_activity_not_encrypted, by = "ts") 
+
+ggplot(data = conti_activity_comparison, aes(x=ts, y=n.x, group=1)) + # creating a plot w/ x axis = timestamp & y axis = number of messages
+  geom_line(color="purple") + # adding lines to the plot & setting a color
+  geom_line(data = conti_activity_comparison, aes(x=ts, y=n.y, group=1), color = "orange") + # overlapping one plot atop another +
+  labs(x = "Date", y = "Num Messages") + # renaming the x & y axes
+  ggtitle("Count of non-encrypted v.s. encrypted messages by Conti Hacker group in 2021") + 
+  theme(axis.text.x = element_text(angle = 45)) + # rotating the x ticks to make them overlap less
+  scale_x_discrete(breaks = conti_activity_comparison$ts[seq(1, length(conti_activity_comparison$ts), by = 3)]) # showing only every 3rd x tick (date) to make the x axis clearer
+```
